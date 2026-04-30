@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envoi Rapport de Stage AUX L3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --green:    #1a7a4a;
+  --green-light: #22a362;
+  --green-dim: #0f4a2d;
+  --purple:   #6c3fc5;
+  --purple-light: #8b5cf6;
+  --ink:      #0d1117;
+  --surface:  #f7faf8;
+  --card:     #ffffff;
+  --border:   #d4e8dc;
+  --muted:    #6b7c72;
+  --required: #c0392b;
+  --radius:   14px;
+  --shadow:   0 4px 24px rgba(26,122,74,0.09);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background noise + grid */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(26,122,74,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(108,63,197,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Top accent bar */
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green), var(--purple-light), var(--green-light));
+}
+
+.page-wrap {
+  position: relative; z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── HEADER ── */
+.header {
+  padding: 52px 0 36px;
+  animation: fadeUp .6s ease both;
+}
+
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.header-badge span { opacity: .7; }
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--green);
+}
+
+.header-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 540px;
+  border-left: 3px solid var(--green);
+  padding-left: 14px;
+}
+
+.header-desc strong { color: var(--ink); }
+
+.required-note {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px;
+  font-size: 13px; color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.req-dot {
+  width: 7px; height: 7px;
+  background: var(--required);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  margin-bottom: 32px;
+  animation: fadeUp .6s .1s ease both;
+}
+
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted);
+  margin-bottom: 8px;
+  font-family: 'Syne', sans-serif;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  border-radius: 999px;
+  width: 0%;
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── SECTIONS ── */
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--green);
+  margin: 40px 0 14px;
+  display: flex; align-items: center; gap: 10px;
+  animation: fadeUp .5s ease both;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: border-color .2s, box-shadow .2s;
+  animation: fadeUp .5s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--green);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .25s ease;
+  border-radius: 0 0 0 0;
+}
+
+.card:focus-within {
+  border-color: var(--green-light);
+  box-shadow: 0 0 0 3px rgba(26,122,74,0.10), var(--shadow);
+}
+
+.card:focus-within::before { transform: scaleY(1); }
+
+.card-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.req { color: var(--required); font-weight: 800; }
+
+.card-hint {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+/* ── INPUTS ── */
+input[type="text"],
+input[type="url"],
+input[type="date"],
+select {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  -webkit-appearance: none;
+}
+
+input[type="text"]::placeholder,
+input[type="url"]::placeholder { color: #b0bfb6; }
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(26,122,74,0.12);
+  background: #fff;
+}
+
+input.uppercase { text-transform: uppercase; }
+input.uppercase::placeholder { text-transform: none; }
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a7a4a' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+/* ── EMAIL CHECKBOX ── */
+.email-block {
+  background: linear-gradient(135deg, rgba(26,122,74,0.05), rgba(108,63,197,0.04));
+  border: 1.5px solid rgba(26,122,74,0.2);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  animation: fadeUp .5s ease both;
+}
+
+.email-row {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.email-row input[type="checkbox"] {
+  width: 20px; height: 20px;
+  accent-color: var(--green);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.email-row label {
+  font-size: 14px; color: var(--ink);
+  cursor: pointer; line-height: 1.4;
+}
+
+.email-row label strong { color: var(--green); }
+
+/* ── RADIO ── */
+.radio-group, .check-group {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 6px;
+}
+
+.radio-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color .18s, background .18s;
+  user-select: none;
+}
+
+.radio-item:hover { border-color: var(--green-light); background: rgba(26,122,74,0.04); }
+
+.radio-item input[type="radio"],
+.radio-item input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+}
+
+.radio-item span { font-size: 14.5px; color: var(--ink); }
+
+.radio-item:has(input:checked) {
+  border-color: var(--green);
+  background: rgba(26,122,74,0.06);
+}
+
+/* ── SUBMIT ── */
+.submit-wrap {
+  margin-top: 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  animation: fadeUp .5s ease both;
+}
+
+.btn-submit {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  padding: 16px 48px;
+  border: none; border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 6px 24px rgba(26,122,74,0.28);
+  letter-spacing: .02em;
+}
+
+.btn-submit:hover {
+  background: var(--green-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(26,122,74,0.34);
+}
+
+.btn-submit:active { transform: scale(.97); }
+
+.btn-clear {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .15s;
+}
+
+.btn-clear:hover { color: var(--required); }
+
+/* ── SUCCESS ── */
+#success-msg {
+  display: none;
+  background: var(--card);
+  border: 2px solid var(--green);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  margin-top: 32px;
+  box-shadow: var(--shadow);
+  animation: fadeUp .5s ease;
+}
+
+#success-msg .check-icon {
+  width: 56px; height: 56px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+
+#success-msg .check-icon svg { width: 28px; color: #fff; }
+
+#success-msg h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--ink); margin-bottom: 10px;
+}
+
+#success-msg p { font-size: 15px; color: var(--muted); }
+
+/* ── ERROR ── */
+.field-error {
+  font-size: 12px;
+  color: var(--required);
+  margin-top: 6px;
+  display: none;
+  align-items: center; gap: 5px;
+}
+
+.field-error.show { display: flex; }
+
+input.invalid, select.invalid { border-color: var(--required) !important; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.footer strong {
+  font-family: 'Syne', sans-serif;
+  color: var(--green);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger cards */
+.card:nth-child(1)  { animation-delay: .05s }
+.card:nth-child(2)  { animation-delay: .10s }
+.card:nth-child(3)  { animation-delay: .15s }
+.card:nth-child(4)  { animation-delay: .20s }
+.card:nth-child(5)  { animation-delay: .25s }
+.card:nth-child(6)  { animation-delay: .30s }
+.card:nth-child(7)  { animation-delay: .35s }
+
+@media (max-width: 500px) {
+  .page-wrap { padding: 0 14px 60px; }
+  .card { padding: 18px 18px; }
+  h1 { font-size: 26px; }
+  .btn-submit { width: 100%; justify-content: center; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+
+  <header class="header">
+    <div class="header-badge">
+      Université des Sciences de la Santé
+      <span>•</span>
+      L3 AUX·P
+    </div>
+    <h1>Envoi Rapport<br/>de Stage <em>AUX L3</em></h1>
+    <p class="header-desc">
+      Rapport de stage L3 AUXP.<br/>
+      <strong>Laboratoire de biologie médicale &amp; Pharmacie officinale/hospitalière.</strong><br/>
+      Chaque étudiant est tenu de remplir ce formulaire à titre personnel, avec toutes les informations exactes ainsi que le lien drive du PDF.
+    </p>
+    <div class="required-note">
+      <span class="req-dot"></span>
+      Les champs marqués d'un <strong style="color:var(--required);margin:0 3px">*</strong> sont obligatoires
+    </div>
+  </header>
+
+  <!-- PROGRESS -->
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span>Progression</span>
+      <span id="progress-pct">0 / 12 champs</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <form id="rapport-form" novalidate>
+
+```
+<!-- ── EMAIL ── -->
+<div class="section-label">Identification</div>
+
+<div class="email-block">
+  <div class="card-label" style="margin-bottom:12px">Email <span class="req">*</span></div>
+  <div class="email-row">
+    <input type="checkbox" id="email-check" name="email_consent" />
+    <label for="email-check">
+      Enregistrer mon email <strong id="email-display">—</strong> dans ma réponse
+    </label>
+  </div>
+  <div class="field-error" id="err-email">⚠ Veuillez cocher pour enregistrer votre email.</div>
+</div>
+
+<!-- Numéro liste -->
+<div class="card">
+  <div class="card-label">Numéro sur la liste <span class="req">*</span></div>
+  <input type="text" id="num-liste" name="numero_liste" placeholder="ex: 14" />
+  <div class="field-error" id="err-num">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- Année bac -->
+<div class="card">
+  <div class="card-label">Année bac <span class="req">*</span></div>
+  <input type="text" id="annee-bac" name="annee_bac" placeholder="ex: 2022" />
+  <div class="field-error" id="err-bac">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- Matricule -->
+<div class="card">
+  <div class="card-label">Matricule Progres <span class="req">*</span></div>
+  <input type="text" id="matricule" name="matricule" placeholder="ex: 202300XXXX" />
+  <div class="field-error" id="err-mat">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- NOM -->
+<div class="card">
+  <div class="card-label">NOM <span class="req">*</span></div>
+  <div class="card-hint">TOUT EN MAJUSCULE.</div>
+  <input type="text" id="nom" name="nom" class="uppercase" placeholder="Votre nom de famille" />
+  <div class="field-error" id="err-nom">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- PRÉNOM -->
+<div class="card">
+  <div class="card-label">PRÉNOM <span class="req">*</span></div>
+  <div class="card-hint">TOUT EN MAJUSCULE.</div>
+  <input type="text" id="prenom" name="prenom" class="uppercase" placeholder="Votre prénom" />
+  <div class="field-error" id="err-prenom">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- ── STAGE INFO ── -->
+<div class="section-label">Informations du stage</div>
+
+<!-- Période -->
+<div class="card">
+  <div class="card-label">Période <span class="req">*</span></div>
+  <select id="periode" name="periode">
+    <option value="">-- Choisir une période --</option>
+    <option value="Période 1 (11-2025 / 02-2026)">Période 1 — Nov 2025 · Fév 2026</option>
+    <option value="Période 2 (03-2026 / 05-2026)">Période 2 — Mar 2026 · Mai 2026</option>
+  </select>
+  <div class="field-error" id="err-periode">⚠ Veuillez sélectionner une période.</div>
+</div>
+
+<!-- Type de stage -->
+<div class="card">
+  <div class="card-label">Type de stage <span class="req">*</span></div>
+  <div class="radio-group" id="type-stage-group">
+    <label class="radio-item">
+      <input type="radio" name="type_stage" value="Laboratoire d'analyses Hôpital" />
+      <span>Laboratoire d'analyses Hôpital</span>
+    </label>
+    <label class="radio-item">
+      <input type="radio" name="type_stage" value="Laboratoire d'analyses Privé" />
+      <span>Laboratoire d'analyses Privé</span>
+    </label>
+    <label class="radio-item">
+      <input type="radio" name="type_stage" value="Pharmacie d'officine" />
+      <span>Pharmacie d'officine</span>
+    </label>
+    <label class="radio-item">
+      <input type="radio" name="type_stage" value="Pharmacie hospitalière" />
+      <span>Pharmacie hospitalière</span>
+    </label>
+  </div>
+  <div class="field-error" id="err-type">⚠ Veuillez sélectionner un type de stage.</div>
+</div>
+
+<!-- Attribution terrain -->
+<div class="card">
+  <div class="card-label">Attribution terrain <span class="req">*</span></div>
+  <div class="radio-group" id="attribution-group">
+    <label class="radio-item">
+      <input type="radio" name="attribution" value="Attribution par répartition" />
+      <span>Attribution par répartition</span>
+    </label>
+    <label class="radio-item">
+      <input type="radio" name="attribution" value="Initiative personnelle" />
+      <span>Initiative personnelle</span>
+    </label>
+  </div>
+  <div class="field-error" id="err-attrib">⚠ Veuillez sélectionner une attribution.</div>
+</div>
+
+<!-- Début du stage -->
+<div class="card">
+  <div class="card-label">Début du stage <span class="req">*</span></div>
+  <div class="card-hint">Écrivez la date mentionnée sur la convention de stage.</div>
+  <input type="date" id="debut" name="debut_stage" />
+  <div class="field-error" id="err-debut">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- Fin du stage -->
+<div class="card">
+  <div class="card-label">Fin du stage <span class="req">*</span></div>
+  <div class="card-hint">Écrivez la date mentionnée sur la convention de stage.</div>
+  <input type="date" id="fin" name="fin_stage" />
+  <div class="field-error" id="err-fin">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- ── RAPPORT ── -->
+<div class="section-label">Rapport & Établissement</div>
+
+<!-- Nom établissement -->
+<div class="card">
+  <div class="card-label">Nom de l'établissement <span class="req">*</span></div>
+  <input type="text" id="etablissement" name="etablissement" placeholder="ex: CHU Beni Messous" />
+  <div class="field-error" id="err-etab">⚠ Ce champ est obligatoire.</div>
+</div>
+
+<!-- Lien Drive -->
+<div class="card">
+  <div class="card-label">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
+  <input type="url" id="lien-drive" name="lien_drive" placeholder="https://drive.google.com/..." />
+  <div class="field-error" id="err-lien">⚠ Veuillez entrer un lien Google Drive valide.</div>
+</div>
+
+<!-- SUBMIT -->
+<div class="submit-wrap">
+  <button type="submit" class="btn-submit">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+    Soumettre le rapport
+  </button>
+  <button type="button" class="btn-clear" onclick="clearForm()">Effacer le formulaire</button>
+</div>
+```
+
+  </form>
+
+  <!-- SUCCESS -->
+
+  <div id="success-msg">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2>Rapport soumis avec succès !</h2>
+    <p>Merci, votre rapport de stage a bien été enregistré.<br/>Vous recevrez une confirmation par email si applicable.</p>
+  </div>
+
+  <footer class="footer">
+    <strong>Faculté de Pharmacie</strong> · Université des Sciences de la Santé<br/>
+    Rapport de stage L3 AUX·P — Formulaire officiel
+  </footer>
+
+</div>
+
+<script>
+  // ── 🔧 PASTE YOUR APPS SCRIPT URL HERE ──
+  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+
+  // ── Fake email (in production link to real auth) ──
+  const mockEmail = "etudiant@uss.dz";
+  document.getElementById('email-display').textContent = mockEmail;
+
+  // ── Progress tracker ──
+  const TOTAL_FIELDS = 12;
+  function updateProgress() {
+    let filled = 0;
+    const email  = document.getElementById('email-check').checked;
+    const fields = [
+      document.getElementById('num-liste').value.trim(),
+      document.getElementById('annee-bac').value.trim(),
+      document.getElementById('matricule').value.trim(),
+      document.getElementById('nom').value.trim(),
+      document.getElementById('prenom').value.trim(),
+      document.getElementById('periode').value,
+      document.querySelector('input[name="type_stage"]:checked') ? '1' : '',
+      document.querySelector('input[name="attribution"]:checked') ? '1' : '',
+      document.getElementById('debut').value,
+      document.getElementById('fin').value,
+      document.getElementById('etablissement').value.trim(),
+      document.getElementById('lien-drive').value.trim(),
+    ];
+    if (email) filled++;
+    fields.forEach(v => { if (v) filled++; });
+    const pct = Math.round((filled / TOTAL_FIELDS) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = filled + ' / ' + TOTAL_FIELDS + ' champs';
+  }
+
+  // attach listeners
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  // ── Uppercase transform ──
+  document.querySelectorAll('.uppercase').forEach(el => {
+    el.addEventListener('input', function() {
+      const pos = this.selectionStart;
+      this.value = this.value.toUpperCase();
+      this.setSelectionRange(pos, pos);
+    });
+  });
+
+  // ── Validation ──
+  function showErr(id, show) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('show', show);
+  }
+
+  function markInvalid(id, invalid) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('invalid', invalid);
+  }
+
+  function validate() {
+    let ok = true;
+
+    const emailOk = document.getElementById('email-check').checked;
+    showErr('err-email', !emailOk);
+    if (!emailOk) ok = false;
+
+    const fields = [
+      { id: 'num-liste',    err: 'err-num' },
+      { id: 'annee-bac',   err: 'err-bac' },
+      { id: 'matricule',   err: 'err-mat' },
+      { id: 'nom',         err: 'err-nom' },
+      { id: 'prenom',      err: 'err-prenom' },
+      { id: 'etablissement', err: 'err-etab' },
+      { id: 'debut',       err: 'err-debut' },
+      { id: 'fin',         err: 'err-fin' },
+    ];
+
+    fields.forEach(({ id, err }) => {
+      const v = document.getElementById(id).value.trim();
+      const bad = !v;
+      showErr(err, bad);
+      markInvalid(id, bad);
+      if (bad) ok = false;
+    });
+
+    // Select
+    const per = document.getElementById('periode').value;
+    showErr('err-periode', !per);
+    markInvalid('periode', !per);
+    if (!per) ok = false;
+
+    // Radios
+    const typeOk = !!document.querySelector('input[name="type_stage"]:checked');
+    showErr('err-type', !typeOk);
+    if (!typeOk) ok = false;
+
+    const attOk = !!document.querySelector('input[name="attribution"]:checked');
+    showErr('err-attrib', !attOk);
+    if (!attOk) ok = false;
+
+    // URL
+    const lien = document.getElementById('lien-drive').value.trim();
+    const lienOk = lien && (lien.startsWith('https://') || lien.startsWith('http://'));
+    showErr('err-lien', !lienOk);
+    markInvalid('lien-drive', !lienOk);
+    if (!lienOk) ok = false;
+
+    return ok;
+  }
+
+  // ── Submit ──
+  document.getElementById('rapport-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) {
+      // scroll to first error
+      const firstErr = document.querySelector('.field-error.show');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Collect data
+    const data = {
+      email_consent: document.getElementById('email-check').checked,
+      numero_liste:  document.getElementById('num-liste').value.trim(),
+      annee_bac:     document.getElementById('annee-bac').value.trim(),
+      matricule:     document.getElementById('matricule').value.trim(),
+      nom:           document.getElementById('nom').value.trim(),
+      prenom:        document.getElementById('prenom').value.trim(),
+      periode:       document.getElementById('periode').value,
+      type_stage:    document.querySelector('input[name="type_stage"]:checked').value,
+      attribution:   document.querySelector('input[name="attribution"]:checked').value,
+      debut_stage:   document.getElementById('debut').value,
+      fin_stage:     document.getElementById('fin').value,
+      etablissement: document.getElementById('etablissement').value.trim(),
+      lien_drive:    document.getElementById('lien-drive').value.trim(),
+    };
+
+    // Disable button and show loading state
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Envoi en cours…`;
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      document.getElementById('rapport-form').style.display = 'none';
+      const msg = document.getElementById('success-msg');
+      msg.style.display = 'block';
+      msg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg> Soumettre le rapport`;
+      alert("Erreur de connexion. Vérifiez votre connexion et réessayez.");
+    });
+  });
+
+  // ── Clear ──
+  function clearForm() {
+    if (!confirm('Effacer tous les champs ?')) return;
+    document.getElementById('rapport-form').reset();
+    document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('.invalid').forEach(e => e.classList.remove('invalid'));
+    updateProgress();
+  }
+</script>
+
+</body>
+</html>
