@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Envoi Rapport de Stage — AUX L3</title>
+  <title>Envoi Rapport de Stage — USS L3</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
@@ -15,50 +15,157 @@
   --g1:      #14532d;
   --g2:      #16a34a;
   --g3:      #4ade80;
-  --p2:      #7c3aed;
   --ink:     #0f1a14;
   --ink2:    #374151;
   --muted:   #6b7280;
-  --border:  #d1fae5;
-  --surface: #f0fdf4;
   --card:    #ffffff;
   --red:     #dc2626;
   --r: 16px;
-  --sh: 0 2px 12px rgba(20,83,45,.10), 0 1px 3px rgba(20,83,45,.06);
-  --sh-lg: 0 8px 32px rgba(20,83,45,.13), 0 2px 8px rgba(20,83,45,.07);
+}
+
+/* AUX theme */
+.theme-aux {
+  --acc1:    #6d28d9;
+  --acc2:    #7c3aed;
+  --acc3:    #a78bfa;
+  --border:  #d1fae5;
+  --surface: #f5f0ff;
+  --sh: 0 2px 12px rgba(109,40,217,.10), 0 1px 3px rgba(20,83,45,.06);
+  --sh-lg: 0 8px 32px rgba(109,40,217,.13), 0 2px 8px rgba(20,83,45,.07);
+  --grad-stripe: linear-gradient(90deg, #14532d, #16a34a, #7c3aed, #a78bfa, #7c3aed, #16a34a, #14532d);
+  --grad-bg1: rgba(22,163,74,.13);
+  --grad-bg2: rgba(109,40,217,.18);
+  --grad-badge: linear-gradient(135deg, #14532d, #6d28d9);
+  --dot-pulse: #a78bfa;
+  --focus-ring: rgba(124,58,237,.12);
+  --focus-border: #7c3aed;
+  --bar-grad: linear-gradient(90deg, #14532d, #7c3aed);
+  --ok-ring: linear-gradient(135deg, #14532d, #7c3aed);
+  --ok-shadow: rgba(124,58,237,.3);
+  --btn-grad: linear-gradient(135deg, #14532d 0%, #7c3aed 100%);
+  --btn-shadow: 0 6px 24px rgba(109,40,217,.30);
+  --btn-shadow-h: 0 10px 32px rgba(109,40,217,.40);
+  --sec-color: #7c3aed;
+  --h1-span-from: #16a34a;
+  --h1-span-to: #7c3aed;
+  --border-left-grad: linear-gradient(180deg, #16a34a, #7c3aed);
+  --opt-check-bg: rgba(124,58,237,.06);
+  --opt-hover-border: #7c3aed;
+  --card-left: #7c3aed;
+  --card-focus-ring: rgba(124,58,237,.10);
+}
+
+/* IPPS theme */
+.theme-ipps {
+  --acc1:    #0369a1;
+  --acc2:    #0284c7;
+  --acc3:    #7dd3fc;
+  --border:  #bae6fd;
+  --surface: #f0f9ff;
+  --sh: 0 2px 12px rgba(3,105,161,.10), 0 1px 3px rgba(20,83,45,.06);
+  --sh-lg: 0 8px 32px rgba(3,105,161,.13), 0 2px 8px rgba(20,83,45,.07);
+  --grad-stripe: linear-gradient(90deg, #14532d, #16a34a, #0284c7, #7dd3fc, #0284c7, #16a34a, #14532d);
+  --grad-bg1: rgba(22,163,74,.13);
+  --grad-bg2: rgba(2,132,199,.18);
+  --grad-badge: linear-gradient(135deg, #14532d, #0369a1);
+  --dot-pulse: #7dd3fc;
+  --focus-ring: rgba(2,132,199,.12);
+  --focus-border: #0284c7;
+  --bar-grad: linear-gradient(90deg, #14532d, #0284c7);
+  --ok-ring: linear-gradient(135deg, #14532d, #0284c7);
+  --ok-shadow: rgba(2,132,199,.3);
+  --btn-grad: linear-gradient(135deg, #14532d 0%, #0284c7 100%);
+  --btn-shadow: 0 6px 24px rgba(3,105,161,.30);
+  --btn-shadow-h: 0 10px 32px rgba(3,105,161,.40);
+  --sec-color: #0284c7;
+  --h1-span-from: #16a34a;
+  --h1-span-to: #0284c7;
+  --border-left-grad: linear-gradient(180deg, #16a34a, #0284c7);
+  --opt-check-bg: rgba(2,132,199,.06);
+  --opt-hover-border: #0284c7;
+  --card-left: #0284c7;
+  --card-focus-ring: rgba(2,132,199,.10);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--surface);
   color: var(--ink);
   min-height: 100vh;
   line-height: 1.5;
 }
 
-body::before {
-  content: '';
+/* ── TAB SWITCHER ── */
+.tab-bar {
+  position: fixed; top: 3px; left: 0; right: 0; z-index: 998;
+  display: flex; justify-content: center;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  padding: 0 24px;
+}
+.tab-inner { display: flex; gap: 4px; padding: 8px 0; }
+.tab-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 22px;
+  border: none; border-radius: 999px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12.5px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  cursor: pointer;
+  transition: all .22s ease;
+  background: transparent;
+  color: var(--muted);
+}
+.tab-btn .tab-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  transition: transform .2s;
+}
+.tab-btn.aux .tab-dot  { background: linear-gradient(135deg, #16a34a, #7c3aed); }
+.tab-btn.ipps .tab-dot { background: linear-gradient(135deg, #16a34a, #0284c7); }
+
+.tab-btn.active {
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+.tab-btn.aux.active  { background: linear-gradient(135deg, #14532d, #7c3aed); }
+.tab-btn.ipps.active { background: linear-gradient(135deg, #14532d, #0284c7); }
+.tab-btn.active .tab-dot { transform: scale(1.3); }
+
+/* ── PANELS ── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+.panel-aux  { background: #f5f0ff; }
+.panel-ipps { background: #f0f9ff; }
+
+.panel-bg {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+.panel-aux .panel-bg {
   background:
     radial-gradient(ellipse 70% 50% at 5% 0%,   rgba(22,163,74,.13) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 95% 100%, rgba(124,58,237,.10) 0%, transparent 55%);
+    radial-gradient(ellipse 55% 45% at 95% 100%, rgba(109,40,217,.18) 0%, transparent 55%);
+}
+.panel-ipps .panel-bg {
+  background:
+    radial-gradient(ellipse 70% 50% at 5% 0%,   rgba(22,163,74,.13) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 95% 100%, rgba(2,132,199,.18) 0%, transparent 55%);
 }
 
 .stripe {
   position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 999;
-  background: linear-gradient(90deg, var(--g1), var(--g2), var(--p2), var(--g2), var(--g1));
-  background-size: 300% 100%;
-  animation: shiftGrad 4s linear infinite;
 }
+.stripe-aux  { background: linear-gradient(90deg, #14532d, #16a34a, #7c3aed, #a78bfa, #7c3aed, #16a34a, #14532d); background-size: 300% 100%; animation: shiftGrad 4s linear infinite; }
+.stripe-ipps { background: linear-gradient(90deg, #14532d, #16a34a, #0284c7, #7dd3fc, #0284c7, #16a34a, #14532d); background-size: 300% 100%; animation: shiftGrad 4s linear infinite; display: none; }
 @keyframes shiftGrad { to { background-position: 300% 0; } }
 
 .wrap {
   position: relative; z-index: 1;
   max-width: 680px;
   margin: 0 auto;
-  padding: 72px 24px 100px;
+  padding: 100px 24px 100px;
 }
 
 /* HEADER */
@@ -68,20 +175,23 @@ body::before {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 5px 16px;
   border-radius: 999px;
-  background: var(--g1);
   color: #fff;
   font-family: 'Syne', sans-serif;
   font-size: 10.5px; font-weight: 700;
   letter-spacing: .13em; text-transform: uppercase;
   margin-bottom: 20px;
 }
+.theme-aux  .badge { background: linear-gradient(135deg, #14532d, #6d28d9); }
+.theme-ipps .badge { background: linear-gradient(135deg, #14532d, #0369a1); }
+
 .badge::before {
   content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--g3);
+  width: 6px; height: 6px; border-radius: 50%;
   animation: pulse 2s ease infinite;
 }
+.theme-aux  .badge::before { background: #a78bfa; }
+.theme-ipps .badge::before { background: #7dd3fc; }
+
 @keyframes pulse {
   0%,100% { opacity:1; transform:scale(1); }
   50%      { opacity:.5; transform:scale(1.4); }
@@ -96,232 +206,165 @@ body::before {
   margin-bottom: 18px;
   letter-spacing: -.02em;
 }
-.hdr h1 span { color: var(--g2); }
+
+.theme-aux  .hdr h1 span { background: linear-gradient(135deg, #16a34a, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.theme-ipps .hdr h1 span { background: linear-gradient(135deg, #16a34a, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
 .hdr-desc {
-  font-size: 14.5px;
-  color: var(--ink2);
-  line-height: 1.7;
+  font-size: 14.5px; color: var(--ink2); line-height: 1.7;
   padding: 16px 20px;
   background: #fff;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--g2);
+  border: 1px solid;
   border-radius: 0 var(--r) var(--r) 0;
-  box-shadow: var(--sh);
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
   max-width: 560px;
 }
+.theme-aux  .hdr-desc { border-color: #d1fae5; border-left: 4px solid #7c3aed; }
+.theme-ipps .hdr-desc { border-color: #bae6fd; border-left: 4px solid #0284c7; }
 .hdr-desc em { font-style: italic; color: var(--muted); }
 
 .req-note {
   display: inline-flex; align-items: center; gap: 7px;
-  margin-top: 16px;
-  font-size: 12.5px; color: var(--muted);
-  padding: 5px 13px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  box-shadow: var(--sh);
+  margin-top: 16px; font-size: 12.5px; color: var(--muted);
+  padding: 5px 13px; background: #fff;
+  border: 1px solid; border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
+.theme-aux  .req-note { border-color: #d1fae5; }
+.theme-ipps .req-note { border-color: #bae6fd; }
 .dot-red { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink:0; }
 
 /* PROGRESS */
 .prog-wrap { margin-bottom: 40px; animation: up .55s .08s ease both; }
-.prog-top {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 8px;
-}
-.prog-top span {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: .07em; text-transform: uppercase;
-  color: var(--muted);
-}
-.prog-top b { color: var(--g2); font-family: 'Syne', sans-serif; font-size: 12px; }
-.prog-track { height: 5px; background: var(--border); border-radius: 999px; overflow: hidden; }
-.prog-bar {
-  height: 100%; width: 0%; border-radius: 999px;
-  background: linear-gradient(90deg, var(--g1), var(--g2));
-  transition: width .45s cubic-bezier(.4,0,.2,1);
-}
+.prog-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.prog-top span { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.prog-track { height: 5px; border-radius: 999px; overflow: hidden; }
+.theme-aux  .prog-track { background: #d1fae5; }
+.theme-ipps .prog-track { background: #bae6fd; }
+.prog-bar { height: 100%; width: 0%; border-radius: 999px; transition: width .45s cubic-bezier(.4,0,.2,1); }
+.theme-aux  .prog-bar { background: linear-gradient(90deg, #14532d, #7c3aed); }
+.theme-ipps .prog-bar { background: linear-gradient(90deg, #14532d, #0284c7); }
+.prog-top b { font-family: 'Syne', sans-serif; font-size: 12px; }
+.theme-aux  .prog-top b { color: #7c3aed; }
+.theme-ipps .prog-top b { color: #0284c7; }
 
 /* SECTION LABEL */
-.sec {
-  display: flex; align-items: center; gap: 12px;
-  margin: 44px 0 18px;
-  animation: up .45s ease both;
-}
-.sec-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 10px; font-weight: 800;
-  letter-spacing: .18em; text-transform: uppercase;
-  color: var(--g2); white-space: nowrap;
-}
-.sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+.sec { display: flex; align-items: center; gap: 12px; margin: 44px 0 18px; animation: up .45s ease both; }
+.sec-text { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
+.theme-aux  .sec-text { color: #7c3aed; }
+.theme-ipps .sec-text { color: #0284c7; }
+.sec-line { flex: 1; height: 1px; }
+.theme-aux  .sec-line { background: linear-gradient(90deg, #d1fae5, transparent); }
+.theme-ipps .sec-line { background: linear-gradient(90deg, #bae6fd, transparent); }
 
 /* CARD */
 .card {
-  background: var(--card);
-  border: 1.5px solid var(--border);
+  background: #fff;
+  border: 1.5px solid;
   border-radius: var(--r);
   padding: 22px 26px;
   margin-bottom: 14px;
-  box-shadow: var(--sh);
   position: relative;
   transition: border-color .2s, box-shadow .2s, transform .15s;
   animation: up .45s ease both;
   overflow: hidden;
 }
-.card::after {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-  background: var(--g2);
-  transition: width .2s ease;
-}
-.card:focus-within {
-  border-color: var(--g2);
-  box-shadow: 0 0 0 4px rgba(22,163,74,.10), var(--sh-lg);
-  transform: translateY(-1px);
-}
+.theme-aux  .card { border-color: #d1fae5; box-shadow: 0 2px 12px rgba(109,40,217,.08); }
+.theme-ipps .card { border-color: #bae6fd; box-shadow: 0 2px 12px rgba(3,105,161,.08); }
+.card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; transition: width .2s ease; }
+.theme-aux  .card::after { background: #7c3aed; }
+.theme-ipps .card::after { background: #0284c7; }
+.theme-aux  .card:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 4px rgba(124,58,237,.10); transform: translateY(-1px); }
+.theme-ipps .card:focus-within { border-color: #0284c7; box-shadow: 0 0 0 4px rgba(2,132,199,.10); transform: translateY(-1px); }
 .card:focus-within::after { width: 3px; }
 
-.lbl {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px; font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 5px;
-  display: flex; align-items: center; gap: 5px;
-}
+.lbl { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
 .req { color: var(--red); font-size: 15px; line-height: 1; }
 .hint { font-size: 12.5px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
 
 /* INPUTS */
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="date"],
-select {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14.5px;
-  color: var(--ink);
-  background: #fafcfa;
-  outline: none;
+input[type="text"], input[type="email"], input[type="url"], input[type="date"], select {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid #e2e8f0; border-radius: 10px;
+  font-family: 'Inter', system-ui, sans-serif; font-size: 14.5px; color: var(--ink);
+  background: #fafcfa; outline: none;
   transition: border-color .18s, box-shadow .18s, background .18s;
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: none; appearance: none;
 }
 input::placeholder { color: #b8c5bc; }
-input:focus, select:focus {
-  border-color: var(--g2);
-  box-shadow: 0 0 0 3px rgba(22,163,74,.12);
-  background: #fff;
-}
-input.err-field, select.err-field {
-  border-color: var(--red) !important;
-  box-shadow: 0 0 0 3px rgba(220,38,38,.08) !important;
-}
+.theme-aux  input:focus, .theme-aux  select:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.12); background: #fff; }
+.theme-ipps input:focus, .theme-ipps select:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,.12); background: #fff; }
+input.err-field, select.err-field { border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(220,38,38,.08) !important; }
 input.uppercase { text-transform: uppercase; }
 select {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 13px center;
-  padding-right: 42px;
+  cursor: pointer; padding-right: 42px;
+  background-repeat: no-repeat; background-position: right 13px center;
 }
+.theme-aux  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237c3aed' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); }
+.theme-ipps select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); }
 
-/* RADIO OPTIONS */
+/* RADIO */
 .opts { display: flex; flex-direction: column; gap: 9px; margin-top: 4px; }
-.opt {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 16px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: border-color .16s, background .16s;
-  user-select: none;
-}
-.opt:hover { border-color: var(--g2); background: rgba(22,163,74,.04); }
-.opt input[type="radio"] {
-  width: 17px; height: 17px;
-  accent-color: var(--g2);
-  flex-shrink: 0; cursor: pointer;
-}
+.opt { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border: 1.5px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: border-color .16s, background .16s; user-select: none; }
+.opt input[type="radio"] { width: 17px; height: 17px; flex-shrink: 0; cursor: pointer; }
+.theme-aux  .opt input[type="radio"] { accent-color: #7c3aed; }
+.theme-ipps .opt input[type="radio"] { accent-color: #0284c7; }
 .opt span { font-size: 14px; color: var(--ink2); }
-.opt:has(input:checked) { border-color: var(--g2); background: rgba(22,163,74,.06); }
+.theme-aux  .opt:hover { border-color: #7c3aed; background: rgba(124,58,237,.04); }
+.theme-ipps .opt:hover { border-color: #0284c7; background: rgba(2,132,199,.04); }
+.theme-aux  .opt:has(input:checked) { border-color: #7c3aed; background: rgba(124,58,237,.06); }
+.theme-ipps .opt:has(input:checked) { border-color: #0284c7; background: rgba(2,132,199,.06); }
 .opt:has(input:checked) span { color: var(--ink); font-weight: 500; }
 
 /* ERROR */
-.err-msg {
-  display: none; align-items: center; gap: 5px;
-  font-size: 12px; color: var(--red); margin-top: 7px;
-}
+.err-msg { display: none; align-items: center; gap: 5px; font-size: 12px; color: var(--red); margin-top: 7px; }
 .err-msg.show { display: flex; }
 
 /* SUBMIT */
-.actions {
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
-  margin-top: 44px; animation: up .45s ease both;
-}
+.actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 44px; animation: up .45s ease both; }
 .btn-sub {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 15px 50px;
-  border: none; border-radius: 999px;
-  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
-  color: #fff;
-  font-family: 'Syne', sans-serif;
-  font-size: 15.5px; font-weight: 700;
-  letter-spacing: .025em;
-  cursor: pointer;
-  box-shadow: 0 6px 24px rgba(20,83,45,.28);
-  transition: transform .15s, box-shadow .15s, opacity .15s;
+  padding: 15px 50px; border: none; border-radius: 999px;
+  color: #fff; font-family: 'Syne', sans-serif; font-size: 15.5px; font-weight: 700; letter-spacing: .025em;
+  cursor: pointer; transition: transform .15s, box-shadow .15s, opacity .15s;
 }
-.btn-sub:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(20,83,45,.35); }
+.theme-aux  .btn-sub { background: linear-gradient(135deg, #14532d 0%, #7c3aed 100%); box-shadow: 0 6px 24px rgba(109,40,217,.30); }
+.theme-ipps .btn-sub { background: linear-gradient(135deg, #14532d 0%, #0284c7 100%); box-shadow: 0 6px 24px rgba(3,105,161,.30); }
+.theme-aux  .btn-sub:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(109,40,217,.40); }
+.theme-ipps .btn-sub:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(3,105,161,.40); }
 .btn-sub:active:not(:disabled) { transform: scale(.97); }
 .btn-sub:disabled { opacity: .65; cursor: not-allowed; }
-.btn-clr {
-  background: none; border: none;
-  font-size: 13px; color: var(--muted);
-  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
-  transition: color .15s;
-}
+.btn-clr { background: none; border: none; font-size: 13px; color: var(--muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
 .btn-clr:hover { color: var(--red); }
 
 /* SUCCESS */
-#ok {
+.ok-box {
   display: none; flex-direction: column; align-items: center;
   text-align: center; padding: 56px 32px;
-  background: var(--card); border: 2px solid var(--g2);
-  border-radius: var(--r); box-shadow: var(--sh-lg);
+  background: #fff; border-radius: var(--r);
   margin-top: 32px; animation: up .5s ease;
 }
+.theme-aux  .ok-box { border: 2px solid #7c3aed; box-shadow: 0 8px 32px rgba(109,40,217,.13); }
+.theme-ipps .ok-box { border: 2px solid #0284c7; box-shadow: 0 8px 32px rgba(3,105,161,.13); }
 .ok-ring {
   width: 72px; height: 72px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--g1), var(--g2));
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 22px; box-shadow: 0 8px 24px rgba(22,163,74,.3);
+  margin-bottom: 22px;
 }
+.theme-aux  .ok-ring { background: linear-gradient(135deg, #14532d, #7c3aed); box-shadow: 0 8px 24px rgba(124,58,237,.3); }
+.theme-ipps .ok-ring { background: linear-gradient(135deg, #14532d, #0284c7); box-shadow: 0 8px 24px rgba(2,132,199,.3); }
 .ok-ring svg { width: 32px; color: #fff; }
-#ok h2 {
-  font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800;
-  color: var(--ink); margin-bottom: 10px;
-}
-#ok p { font-size: 14.5px; color: var(--muted); line-height: 1.65; }
+.ok-box h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+.ok-box p { font-size: 14.5px; color: var(--muted); line-height: 1.65; }
 
 /* FOOTER */
-footer {
-  text-align: center; font-size: 12px; color: var(--muted);
-  margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border);
-}
+footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 56px; padding-top: 20px; }
+.theme-aux  footer { border-top: 1px solid #d1fae5; }
+.theme-ipps footer { border-top: 1px solid #bae6fd; }
 footer strong { color: var(--g1); font-weight: 600; }
 
 /* KEYFRAMES */
-@keyframes up {
-  from { opacity:0; transform:translateY(14px); }
-  to   { opacity:1; transform:translateY(0); }
-}
+@keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .card:nth-child(1)  { animation-delay:.04s }
@@ -337,9 +380,10 @@ footer strong { color: var(--g1); font-weight: 600; }
 .card:nth-child(11) { animation-delay:.44s }
 
 @media (max-width: 520px) {
-  .wrap { padding: 64px 14px 80px; }
+  .wrap { padding: 90px 14px 80px; }
   .card { padding: 18px 18px; }
   .btn-sub { width: 100%; justify-content: center; padding: 15px 24px; }
+  .tab-btn { padding: 8px 14px; font-size: 11px; }
 }
 ```
 
@@ -347,310 +391,497 @@ footer strong { color: var(--g1); font-weight: 600; }
 </head>
 <body>
 
-<div class="stripe"></div>
+<div class="stripe stripe-aux"  id="stripe-aux"></div>
+<div class="stripe stripe-ipps" id="stripe-ipps"></div>
 
-<div class="wrap">
+<!-- TAB BAR -->
 
-  <header class="hdr">
-    <div class="badge">Université des Sciences de la Santé · L3 AUX·P</div>
-    <h1>Envoi Rapport<br/>de Stage <span>AUX L3</span></h1>
-    <div class="hdr-desc">
-      Rapport de stage L3 AUXP.<br/>
-      <em>Laboratoire de biologie médicale &amp; Pharmacie officinale/hospitalière.</em><br/>
-      Chaque étudiant est tenu de remplir ce formulaire à titre personnel, avec toutes les informations exactes ainsi que le lien drive du PDF.
-    </div>
-    <div class="req-note">
-      <span class="dot-red"></span>
-      Les champs marqués d'un <strong style="color:var(--red);margin:0 2px">*</strong> sont obligatoires
-    </div>
-  </header>
-
-  <div class="prog-wrap">
-    <div class="prog-top">
-      <span>Progression</span>
-      <b id="prog-txt">0 / 13 champs</b>
-    </div>
-    <div class="prog-track"><div class="prog-bar" id="prog-bar"></div></div>
+<div class="tab-bar">
+  <div class="tab-inner">
+    <button class="tab-btn aux active" onclick="switchTab('aux')">
+      <span class="tab-dot"></span> AUX L3
+    </button>
+    <button class="tab-btn ipps" onclick="switchTab('ipps')">
+      <span class="tab-dot"></span> IPPS L3
+    </button>
   </div>
+</div>
 
-  <form id="form" novalidate>
+<!-- ══════════════════ AUX PANEL ══════════════════ -->
+
+<div class="panel panel-aux theme-aux active" id="panel-aux">
+  <div class="panel-bg"></div>
+  <div class="wrap">
 
 ```
-<div class="sec"><span class="sec-text">Identification</span><span class="sec-line"></span></div>
-
-<!-- Email -->
-<div class="card">
-  <div class="lbl">Email <span class="req">*</span></div>
-  <div class="hint">Entrez votre adresse email universitaire ou personnelle.</div>
-  <input type="email" id="email" name="email" placeholder="ex: prenom.nom@uss.dz" autocomplete="email" />
-  <div class="err-msg" id="err-email">⚠ Veuillez entrer une adresse email valide.</div>
-</div>
-
-<!-- Numéro liste -->
-<div class="card">
-  <div class="lbl">Numéro sur la liste <span class="req">*</span></div>
-  <input type="text" id="num-liste" name="numero_liste" placeholder="ex: 14" />
-  <div class="err-msg" id="err-num">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<!-- Année bac -->
-<div class="card">
-  <div class="lbl">Année bac <span class="req">*</span></div>
-  <input type="text" id="annee-bac" name="annee_bac" placeholder="ex: 2022" maxlength="4" />
-  <div class="err-msg" id="err-bac">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<!-- Matricule -->
-<div class="card">
-  <div class="lbl">Matricule Progres <span class="req">*</span></div>
-  <input type="text" id="matricule" name="matricule" placeholder="ex: 202300XXXX" />
-  <div class="err-msg" id="err-mat">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<!-- NOM -->
-<div class="card">
-  <div class="lbl">NOM <span class="req">*</span></div>
-  <div class="hint">TOUT EN MAJUSCULE.</div>
-  <input type="text" id="nom" name="nom" class="uppercase" placeholder="Votre nom de famille" />
-  <div class="err-msg" id="err-nom">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<!-- PRÉNOM -->
-<div class="card">
-  <div class="lbl">PRÉNOM <span class="req">*</span></div>
-  <div class="hint">TOUT EN MAJUSCULE.</div>
-  <input type="text" id="prenom" name="prenom" class="uppercase" placeholder="Votre prénom" />
-  <div class="err-msg" id="err-prenom">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<div class="sec"><span class="sec-text">Informations du stage</span><span class="sec-line"></span></div>
-
-<!-- Période -->
-<div class="card">
-  <div class="lbl">Période <span class="req">*</span></div>
-  <select id="periode" name="periode">
-    <option value="">-- Choisir une période --</option>
-    <option value="Période 1 (11-2025 / 02-2026)">Période 1 — Nov 2025 · Fév 2026</option>
-    <option value="Période 2 (03-2026 / 05-2026)">Période 2 — Mar 2026 · Mai 2026</option>
-  </select>
-  <div class="err-msg" id="err-periode">⚠ Veuillez sélectionner une période.</div>
-</div>
-
-<!-- Type de stage -->
-<div class="card">
-  <div class="lbl">Type de stage <span class="req">*</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="type_stage" value="Laboratoire d'analyses Hôpital"/><span>Laboratoire d'analyses Hôpital</span></label>
-    <label class="opt"><input type="radio" name="type_stage" value="Laboratoire d'analyses Privé"/><span>Laboratoire d'analyses Privé</span></label>
-    <label class="opt"><input type="radio" name="type_stage" value="Pharmacie d'officine"/><span>Pharmacie d'officine</span></label>
-    <label class="opt"><input type="radio" name="type_stage" value="Pharmacie hospitalière"/><span>Pharmacie hospitalière</span></label>
+<header class="hdr">
+  <div class="badge">Université des Sciences de la Santé · L3 AUX·P</div>
+  <h1>Envoi Rapport<br/>de Stage <span>AUX L3</span></h1>
+  <div class="hdr-desc">
+    Rapport de stage L3 AUXP.<br/>
+    <em>Laboratoire de biologie médicale &amp; Pharmacie officinale/hospitalière.</em><br/>
+    Chaque étudiant est tenu de remplir ce formulaire à titre personnel, avec toutes les informations exactes ainsi que le lien drive du PDF.
   </div>
-  <div class="err-msg" id="err-type">⚠ Veuillez sélectionner un type de stage.</div>
-</div>
-
-<!-- Attribution terrain -->
-<div class="card">
-  <div class="lbl">Attribution terrain <span class="req">*</span></div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="attribution" value="Attribution par répartition"/><span>Attribution par répartition</span></label>
-    <label class="opt"><input type="radio" name="attribution" value="Initiative personnelle"/><span>Initiative personnelle</span></label>
+  <div class="req-note">
+    <span class="dot-red"></span>
+    Les champs marqués d'un <strong style="color:#dc2626;margin:0 2px">*</strong> sont obligatoires
   </div>
-  <div class="err-msg" id="err-attrib">⚠ Veuillez sélectionner une attribution.</div>
+</header>
+
+<div class="prog-wrap">
+  <div class="prog-top">
+    <span>Progression</span>
+    <b id="aux-prog-txt">0 / 13 champs</b>
+  </div>
+  <div class="prog-track"><div class="prog-bar" id="aux-prog-bar"></div></div>
 </div>
 
-<!-- Début -->
-<div class="card">
-  <div class="lbl">Début du stage <span class="req">*</span></div>
-  <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
-  <input type="date" id="debut" name="debut_stage" />
-  <div class="err-msg" id="err-debut">⚠ Ce champ est obligatoire.</div>
+<form id="form-aux" novalidate>
+
+  <div class="sec"><span class="sec-text">Identification</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Email <span class="req">*</span></div>
+    <div class="hint">Entrez votre adresse email universitaire ou personnelle.</div>
+    <input type="email" id="aux-email" placeholder="ex: prenom.nom@uss.dz" autocomplete="email" />
+    <div class="err-msg" id="aux-err-email">⚠ Veuillez entrer une adresse email valide.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Numéro sur la liste <span class="req">*</span></div>
+    <input type="text" id="aux-num-liste" placeholder="ex: 14" />
+    <div class="err-msg" id="aux-err-num">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Année bac <span class="req">*</span></div>
+    <input type="text" id="aux-annee-bac" placeholder="ex: 2022" maxlength="4" />
+    <div class="err-msg" id="aux-err-bac">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Matricule Progres <span class="req">*</span></div>
+    <input type="text" id="aux-matricule" placeholder="ex: 202300XXXX" />
+    <div class="err-msg" id="aux-err-mat">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">NOM <span class="req">*</span></div>
+    <div class="hint">TOUT EN MAJUSCULE.</div>
+    <input type="text" id="aux-nom" class="uppercase" placeholder="Votre nom de famille" />
+    <div class="err-msg" id="aux-err-nom">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">PRÉNOM <span class="req">*</span></div>
+    <div class="hint">TOUT EN MAJUSCULE.</div>
+    <input type="text" id="aux-prenom" class="uppercase" placeholder="Votre prénom" />
+    <div class="err-msg" id="aux-err-prenom">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="sec"><span class="sec-text">Informations du stage</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Période <span class="req">*</span></div>
+    <select id="aux-periode">
+      <option value="">-- Choisir une période --</option>
+      <option value="Période 1">Période 1</option>
+      <option value="Période 2">Période 2</option>
+    </select>
+    <div class="err-msg" id="aux-err-periode">⚠ Veuillez sélectionner une période.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Type de stage <span class="req">*</span></div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="aux-type_stage" value="Laboratoire d'analyses Hôpital"/><span>Laboratoire d'analyses Hôpital</span></label>
+      <label class="opt"><input type="radio" name="aux-type_stage" value="Laboratoire d'analyses Privé"/><span>Laboratoire d'analyses Privé</span></label>
+      <label class="opt"><input type="radio" name="aux-type_stage" value="Pharmacie d'officine"/><span>Pharmacie d'officine</span></label>
+      <label class="opt"><input type="radio" name="aux-type_stage" value="Pharmacie hospitalière"/><span>Pharmacie hospitalière</span></label>
+    </div>
+    <div class="err-msg" id="aux-err-type">⚠ Veuillez sélectionner un type de stage.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Attribution terrain <span class="req">*</span></div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="aux-attribution" value="Attribution par répartition"/><span>Attribution par répartition</span></label>
+      <label class="opt"><input type="radio" name="aux-attribution" value="Initiative personnelle"/><span>Initiative personnelle</span></label>
+    </div>
+    <div class="err-msg" id="aux-err-attrib">⚠ Veuillez sélectionner une attribution.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Début du stage <span class="req">*</span></div>
+    <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
+    <input type="date" id="aux-debut" />
+    <div class="err-msg" id="aux-err-debut">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Fin du stage <span class="req">*</span></div>
+    <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
+    <input type="date" id="aux-fin" />
+    <div class="err-msg" id="aux-err-fin">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="sec"><span class="sec-text">Rapport &amp; Établissement</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Nom de l'établissement <span class="req">*</span></div>
+    <input type="text" id="aux-etab" placeholder="ex: CHU Beni Messous" />
+    <div class="err-msg" id="aux-err-etab">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
+    <div class="hint">Assurez-vous que le fichier est partagé en accès public (mode "Lien").</div>
+    <input type="url" id="aux-lien" placeholder="https://drive.google.com/file/d/..." />
+    <div class="err-msg" id="aux-err-lien">⚠ Veuillez entrer un lien valide (commençant par https://).</div>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn-sub" id="aux-btn-sub">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Soumettre le rapport
+    </button>
+    <button type="button" class="btn-clr" onclick="clearForm('aux')">Effacer le formulaire</button>
+  </div>
+
+</form>
+
+<div class="ok-box" id="aux-ok">
+  <div class="ok-ring">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <h2>Rapport soumis !</h2>
+  <p>Votre rapport de stage AUX a bien été enregistré.<br/>Merci pour votre soumission.</p>
 </div>
 
-<!-- Fin -->
-<div class="card">
-  <div class="lbl">Fin du stage <span class="req">*</span></div>
-  <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
-  <input type="date" id="fin" name="fin_stage" />
-  <div class="err-msg" id="err-fin">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<div class="sec"><span class="sec-text">Rapport &amp; Établissement</span><span class="sec-line"></span></div>
-
-<!-- Établissement -->
-<div class="card">
-  <div class="lbl">Nom de l'établissement <span class="req">*</span></div>
-  <input type="text" id="etab" name="etablissement" placeholder="ex: CHU Beni Messous" />
-  <div class="err-msg" id="err-etab">⚠ Ce champ est obligatoire.</div>
-</div>
-
-<!-- Lien Drive -->
-<div class="card">
-  <div class="lbl">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
-  <div class="hint">Assurez-vous que le fichier est partagé en accès public (mode "Lien").</div>
-  <input type="url" id="lien" name="lien_drive" placeholder="https://drive.google.com/file/d/..." />
-  <div class="err-msg" id="err-lien">⚠ Veuillez entrer un lien valide (commençant par https://).</div>
-</div>
-
-<div class="actions">
-  <button type="submit" class="btn-sub" id="btn-sub">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    Soumettre le rapport
-  </button>
-  <button type="button" class="btn-clr" onclick="clearForm()">Effacer le formulaire</button>
-</div>
+<footer>
+  <strong>Faculté de Pharmacie</strong> · Université des Sciences de la Santé<br/>
+  Rapport de stage L3 AUX·P — Formulaire officiel
+</footer>
 ```
 
-  </form>
+  </div>
+</div>
 
-  <div id="ok">
-    <div class="ok-ring">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <h2>Rapport soumis !</h2>
-    <p>Votre rapport de stage a bien été enregistré.<br/>Merci pour votre soumission.</p>
+<!-- ══════════════════ IPPS PANEL ══════════════════ -->
+
+<div class="panel panel-ipps theme-ipps" id="panel-ipps">
+  <div class="panel-bg"></div>
+  <div class="wrap">
+
+```
+<header class="hdr">
+  <div class="badge">Université des Sciences de la Santé · L3 IPPS</div>
+  <h1>Envoi Rapport<br/>de Stage <span>IPPS L3</span></h1>
+  <div class="hdr-desc">
+    Rapport de stage L3 IPPS.<br/>
+    <em>Institut de Préparation aux Professions de Santé.</em><br/>
+    Chaque étudiant est tenu de remplir ce formulaire à titre personnel, avec toutes les informations exactes ainsi que le lien drive du PDF.
+  </div>
+  <div class="req-note">
+    <span class="dot-red"></span>
+    Les champs marqués d'un <strong style="color:#dc2626;margin:0 2px">*</strong> sont obligatoires
+  </div>
+</header>
+
+<div class="prog-wrap">
+  <div class="prog-top">
+    <span>Progression</span>
+    <b id="ipps-prog-txt">0 / 13 champs</b>
+  </div>
+  <div class="prog-track"><div class="prog-bar" id="ipps-prog-bar"></div></div>
+</div>
+
+<form id="form-ipps" novalidate>
+
+  <div class="sec"><span class="sec-text">Identification</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Email <span class="req">*</span></div>
+    <div class="hint">Entrez votre adresse email universitaire ou personnelle.</div>
+    <input type="email" id="ipps-email" placeholder="ex: prenom.nom@uss.dz" autocomplete="email" />
+    <div class="err-msg" id="ipps-err-email">⚠ Veuillez entrer une adresse email valide.</div>
   </div>
 
-  <footer>
-    <strong>Faculté de Pharmacie</strong> · Université des Sciences de la Santé<br/>
-    Rapport de stage L3 AUX·P — Formulaire officiel
-  </footer>
+  <div class="card">
+    <div class="lbl">Numéro sur la liste <span class="req">*</span></div>
+    <input type="text" id="ipps-num-liste" placeholder="ex: 14" />
+    <div class="err-msg" id="ipps-err-num">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Année bac <span class="req">*</span></div>
+    <input type="text" id="ipps-annee-bac" placeholder="ex: 2022" maxlength="4" />
+    <div class="err-msg" id="ipps-err-bac">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Matricule Progres <span class="req">*</span></div>
+    <input type="text" id="ipps-matricule" placeholder="ex: 202300XXXX" />
+    <div class="err-msg" id="ipps-err-mat">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">NOM <span class="req">*</span></div>
+    <div class="hint">TOUT EN MAJUSCULE.</div>
+    <input type="text" id="ipps-nom" class="uppercase" placeholder="Votre nom de famille" />
+    <div class="err-msg" id="ipps-err-nom">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">PRÉNOM <span class="req">*</span></div>
+    <div class="hint">TOUT EN MAJUSCULE.</div>
+    <input type="text" id="ipps-prenom" class="uppercase" placeholder="Votre prénom" />
+    <div class="err-msg" id="ipps-err-prenom">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="sec"><span class="sec-text">Informations du stage</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Période <span class="req">*</span></div>
+    <select id="ipps-periode">
+      <option value="">-- Choisir une période --</option>
+      <option value="Période 1">Période 1</option>
+      <option value="Période 2">Période 2</option>
+    </select>
+    <div class="err-msg" id="ipps-err-periode">⚠ Veuillez sélectionner une période.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Type de stage <span class="req">*</span></div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="ipps-type_stage" value="Laboratoire industrie pharmaceutique"/><span>Laboratoire industrie pharmaceutique</span></label>
+    </div>
+    <div class="err-msg" id="ipps-err-type">⚠ Veuillez sélectionner un type de stage.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Attribution terrain <span class="req">*</span></div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="ipps-attribution" value="Attribution par répartition"/><span>Attribution par répartition</span></label>
+      <label class="opt"><input type="radio" name="ipps-attribution" value="Initiative personnelle"/><span>Initiative personnelle</span></label>
+    </div>
+    <div class="err-msg" id="ipps-err-attrib">⚠ Veuillez sélectionner une attribution.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Début du stage <span class="req">*</span></div>
+    <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
+    <input type="date" id="ipps-debut" />
+    <div class="err-msg" id="ipps-err-debut">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Fin du stage <span class="req">*</span></div>
+    <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
+    <input type="date" id="ipps-fin" />
+    <div class="err-msg" id="ipps-err-fin">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="sec"><span class="sec-text">Rapport &amp; Établissement</span><span class="sec-line"></span></div>
+
+  <div class="card">
+    <div class="lbl">Nom de l'établissement <span class="req">*</span></div>
+    <input type="text" id="ipps-etab" placeholder="ex: Saidal" />
+    <div class="err-msg" id="ipps-err-etab">⚠ Ce champ est obligatoire.</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
+    <div class="hint">Assurez-vous que le fichier est partagé en accès public (mode "Lien").</div>
+    <input type="url" id="ipps-lien" placeholder="https://drive.google.com/file/d/..." />
+    <div class="err-msg" id="ipps-err-lien">⚠ Veuillez entrer un lien valide (commençant par https://).</div>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn-sub" id="ipps-btn-sub">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Soumettre le rapport
+    </button>
+    <button type="button" class="btn-clr" onclick="clearForm('ipps')">Effacer le formulaire</button>
+  </div>
+
+</form>
+
+<div class="ok-box" id="ipps-ok">
+  <div class="ok-ring">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <h2>Rapport soumis !</h2>
+  <p>Votre rapport de stage IPPS a bien été enregistré.<br/>Merci pour votre soumission.</p>
+</div>
+
+<footer>
+  <strong>Faculté de Pharmacie</strong> · Université des Sciences de la Santé<br/>
+  Rapport de stage L3 IPPS — Formulaire officiel
+</footer>
+```
+
+  </div>
 </div>
 
 <script>
-  // ── COLLE TON URL APPS SCRIPT ICI ──────────────────────────
+  // ── COLLE TON URL APPS SCRIPT ICI (une seule URL pour les deux) ──
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxR0EdJMwrKOgb5PonVVqaWs-X9HGGTk0SKh_DhTzWApj28CDFaS1bnzj-E9Ad2OdigmA/exec";
-  // ────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────────────
 
   const TOTAL = 13;
 
-  function updateProgress() {
-    const vals = [
-      document.getElementById('email').value.trim(),
-      document.getElementById('num-liste').value.trim(),
-      document.getElementById('annee-bac').value.trim(),
-      document.getElementById('matricule').value.trim(),
-      document.getElementById('nom').value.trim(),
-      document.getElementById('prenom').value.trim(),
-      document.getElementById('periode').value,
-      document.querySelector('input[name="type_stage"]:checked') ? '1' : '',
-      document.querySelector('input[name="attribution"]:checked') ? '1' : '',
-      document.getElementById('debut').value,
-      document.getElementById('fin').value,
-      document.getElementById('etab').value.trim(),
-      document.getElementById('lien').value.trim(),
-    ];
-    const filled = vals.filter(Boolean).length;
-    document.getElementById('prog-bar').style.width = Math.round(filled / TOTAL * 100) + '%';
-    document.getElementById('prog-txt').textContent = filled + ' / ' + TOTAL + ' champs';
+  // ── TAB SWITCH ──────────────────────────────────────────────
+  function switchTab(tab) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    document.querySelector('.tab-btn.' + tab).classList.add('active');
+    document.getElementById('stripe-aux').style.display  = tab === 'aux'  ? 'block' : 'none';
+    document.getElementById('stripe-ipps').style.display = tab === 'ipps' ? 'block' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  document.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('input', updateProgress);
-    el.addEventListener('change', updateProgress);
-  });
+  // ── PROGRESS ────────────────────────────────────────────────
+  function updateProgress(prefix) {
+    const g = id => document.getElementById(prefix + '-' + id);
+    const vals = [
+      g('email').value.trim(),
+      g('num-liste').value.trim(),
+      g('annee-bac').value.trim(),
+      g('matricule').value.trim(),
+      g('nom').value.trim(),
+      g('prenom').value.trim(),
+      g('periode').value,
+      document.querySelector(`input[name="${prefix}-type_stage"]:checked`) ? '1' : '',
+      document.querySelector(`input[name="${prefix}-attribution"]:checked`) ? '1' : '',
+      g('debut').value,
+      g('fin').value,
+      g('etab').value.trim(),
+      g('lien').value.trim(),
+    ];
+    const filled = vals.filter(Boolean).length;
+    g('prog-bar').style.width = Math.round(filled / TOTAL * 100) + '%';
+    g('prog-txt').textContent = filled + ' / ' + TOTAL + ' champs';
+  }
 
-  document.querySelectorAll('.uppercase').forEach(el => {
-    el.addEventListener('input', function() {
-      const p = this.selectionStart;
-      this.value = this.value.toUpperCase();
-      this.setSelectionRange(p, p);
+  ['aux','ipps'].forEach(prefix => {
+    const panel = document.getElementById('panel-' + prefix);
+    panel.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input',  () => updateProgress(prefix));
+      el.addEventListener('change', () => updateProgress(prefix));
+    });
+    panel.querySelectorAll('.uppercase').forEach(el => {
+      el.addEventListener('input', function() {
+        const p = this.selectionStart;
+        this.value = this.value.toUpperCase();
+        this.setSelectionRange(p, p);
+      });
     });
   });
 
+  // ── VALIDATION ──────────────────────────────────────────────
   function showErr(id, on) { document.getElementById(id)?.classList.toggle('show', on); }
   function markErr(el, on) { el?.classList.toggle('err-field', on); }
 
-  function validate() {
+  function validate(prefix) {
+    const g = id => document.getElementById(prefix + '-' + id);
     let ok = true;
 
-    const emailEl = document.getElementById('email');
+    const emailEl = g('email');
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
-    showErr('err-email', !emailOk); markErr(emailEl, !emailOk);
+    showErr(prefix+'-err-email', !emailOk); markErr(emailEl, !emailOk);
     if (!emailOk) ok = false;
 
-    [
-      ['num-liste','err-num'],['annee-bac','err-bac'],['matricule','err-mat'],
-      ['nom','err-nom'],['prenom','err-prenom'],
-      ['debut','err-debut'],['fin','err-fin'],['etab','err-etab']
+    [['num-liste','err-num'],['annee-bac','err-bac'],['matricule','err-mat'],
+     ['nom','err-nom'],['prenom','err-prenom'],
+     ['debut','err-debut'],['fin','err-fin'],['etab','err-etab']
     ].forEach(([id, err]) => {
-      const el = document.getElementById(id);
+      const el = g(id);
       const bad = !el.value.trim();
-      showErr(err, bad); markErr(el, bad);
+      showErr(prefix+'-'+err, bad); markErr(el, bad);
       if (bad) ok = false;
     });
 
-    const per = document.getElementById('periode');
-    showErr('err-periode', !per.value); markErr(per, !per.value);
+    const per = g('periode');
+    showErr(prefix+'-err-periode', !per.value); markErr(per, !per.value);
     if (!per.value) ok = false;
 
-    const typeOk = !!document.querySelector('input[name="type_stage"]:checked');
-    showErr('err-type', !typeOk);
+    const typeOk = !!document.querySelector(`input[name="${prefix}-type_stage"]:checked`);
+    showErr(prefix+'-err-type', !typeOk);
     if (!typeOk) ok = false;
 
-    const attOk = !!document.querySelector('input[name="attribution"]:checked');
-    showErr('err-attrib', !attOk);
+    const attOk = !!document.querySelector(`input[name="${prefix}-attribution"]:checked`);
+    showErr(prefix+'-err-attrib', !attOk);
     if (!attOk) ok = false;
 
-    const lienEl = document.getElementById('lien');
+    const lienEl = g('lien');
     const lienOk = /^https?:\/\/.+/.test(lienEl.value.trim());
-    showErr('err-lien', !lienOk); markErr(lienEl, !lienOk);
+    showErr(prefix+'-err-lien', !lienOk); markErr(lienEl, !lienOk);
     if (!lienOk) ok = false;
 
     return ok;
   }
 
-  document.getElementById('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (!validate()) {
-      document.querySelector('.err-msg.show')?.scrollIntoView({ behavior:'smooth', block:'center' });
+  // ── SUBMIT ──────────────────────────────────────────────────
+  function handleSubmit(prefix) {
+    const g = id => document.getElementById(prefix + '-' + id);
+
+    if (!validate(prefix)) {
+      document.querySelector('#panel-'+prefix+' .err-msg.show')
+        ?.scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
 
-    const btn = document.getElementById('btn-sub');
+    const btn = g('btn-sub');
     btn.disabled = true;
     btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="animation:spin .9s linear infinite"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 1-10-10"/></svg> Envoi en cours…`;
 
     const payload = {
-      email:         document.getElementById('email').value.trim(),
-      numero_liste:  document.getElementById('num-liste').value.trim(),
-      annee_bac:     document.getElementById('annee-bac').value.trim(),
-      matricule:     document.getElementById('matricule').value.trim(),
-      nom:           document.getElementById('nom').value.trim(),
-      prenom:        document.getElementById('prenom').value.trim(),
-      periode:       document.getElementById('periode').value,
-      type_stage:    document.querySelector('input[name="type_stage"]:checked').value,
-      attribution:   document.querySelector('input[name="attribution"]:checked').value,
-      debut_stage:   document.getElementById('debut').value,
-      fin_stage:     document.getElementById('fin').value,
-      etablissement: document.getElementById('etab').value.trim(),
-      lien_drive:    document.getElementById('lien').value.trim(),
+      filiere:       prefix.toUpperCase(),
+      email:         g('email').value.trim(),
+      numero_liste:  g('num-liste').value.trim(),
+      annee_bac:     g('annee-bac').value.trim(),
+      matricule:     g('matricule').value.trim(),
+      nom:           g('nom').value.trim(),
+      prenom:        g('prenom').value.trim(),
+      periode:       g('periode').value,
+      type_stage:    document.querySelector(`input[name="${prefix}-type_stage"]:checked`).value,
+      attribution:   document.querySelector(`input[name="${prefix}-attribution"]:checked`).value,
+      debut_stage:   g('debut').value,
+      fin_stage:     g('fin').value,
+      etablissement: g('etab').value.trim(),
+      lien_drive:    g('lien').value.trim(),
     };
 
     fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
     .then(() => {
-      document.getElementById('form').style.display = 'none';
-      const ok = document.getElementById('ok');
+      document.getElementById('form-'+prefix).style.display = 'none';
+      const ok = g('ok');
       ok.style.display = 'flex';
-      ok.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      ok.scrollIntoView({ behavior:'smooth', block:'start' });
     })
     .catch(() => {
       btn.disabled = false;
       btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Soumettre le rapport`;
       alert("❌ Erreur réseau. Vérifiez votre connexion et réessayez.");
     });
-  });
+  }
 
-  function clearForm() {
+  document.getElementById('form-aux').addEventListener('submit',  e => { e.preventDefault(); handleSubmit('aux'); });
+  document.getElementById('form-ipps').addEventListener('submit', e => { e.preventDefault(); handleSubmit('ipps'); });
+
+  // ── CLEAR ───────────────────────────────────────────────────
+  function clearForm(prefix) {
     if (!confirm('Effacer tous les champs ?')) return;
-    document.getElementById('form').reset();
-    document.querySelectorAll('.err-msg').forEach(e => e.classList.remove('show'));
-    document.querySelectorAll('.err-field').forEach(e => e.classList.remove('err-field'));
-    updateProgress();
+    document.getElementById('form-'+prefix).reset();
+    document.querySelectorAll('#panel-'+prefix+' .err-msg').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('#panel-'+prefix+' .err-field').forEach(e => e.classList.remove('err-field'));
+    updateProgress(prefix);
     window.scrollTo({ top:0, behavior:'smooth' });
   }
 </script>
