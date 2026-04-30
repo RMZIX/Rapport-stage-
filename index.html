@@ -4,444 +4,342 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Envoi Rapport de Stage AUX L3</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <title>Envoi Rapport de Stage — AUX L3</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
 ```
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --green:    #1a7a4a;
-  --green-light: #22a362;
-  --green-dim: #0f4a2d;
-  --purple:   #6c3fc5;
-  --purple-light: #8b5cf6;
-  --ink:      #0d1117;
-  --surface:  #f7faf8;
-  --card:     #ffffff;
-  --border:   #d4e8dc;
-  --muted:    #6b7c72;
-  --required: #c0392b;
-  --radius:   14px;
-  --shadow:   0 4px 24px rgba(26,122,74,0.09);
+  --g1:      #14532d;
+  --g2:      #16a34a;
+  --g3:      #4ade80;
+  --p2:      #7c3aed;
+  --ink:     #0f1a14;
+  --ink2:    #374151;
+  --muted:   #6b7280;
+  --border:  #d1fae5;
+  --surface: #f0fdf4;
+  --card:    #ffffff;
+  --red:     #dc2626;
+  --r: 16px;
+  --sh: 0 2px 12px rgba(20,83,45,.10), 0 1px 3px rgba(20,83,45,.06);
+  --sh-lg: 0 8px 32px rgba(20,83,45,.13), 0 2px 8px rgba(20,83,45,.07);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--surface);
   color: var(--ink);
   min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+  line-height: 1.5;
 }
 
-/* Background noise + grid */
 body::before {
   content: '';
-  position: fixed; inset: 0; z-index: 0;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(26,122,74,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(108,63,197,0.08) 0%, transparent 60%);
-  pointer-events: none;
+    radial-gradient(ellipse 70% 50% at 5% 0%,   rgba(22,163,74,.13) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 95% 100%, rgba(124,58,237,.10) 0%, transparent 55%);
 }
 
-/* Top accent bar */
-.top-bar {
-  position: sticky; top: 0; z-index: 100;
-  height: 4px;
-  background: linear-gradient(90deg, var(--green), var(--purple-light), var(--green-light));
+.stripe {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--g1), var(--g2), var(--p2), var(--g2), var(--g1));
+  background-size: 300% 100%;
+  animation: shiftGrad 4s linear infinite;
 }
+@keyframes shiftGrad { to { background-position: 300% 0; } }
 
-.page-wrap {
+.wrap {
   position: relative; z-index: 1;
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 0 20px 80px;
+  padding: 72px 24px 100px;
 }
 
-/* ── HEADER ── */
-.header {
-  padding: 52px 0 36px;
-  animation: fadeUp .6s ease both;
-}
+/* HEADER */
+.hdr { margin-bottom: 48px; animation: up .55s ease both; }
 
-.header-badge {
+.badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--green);
+  padding: 5px 16px;
+  border-radius: 999px;
+  background: var(--g1);
   color: #fff;
   font-family: 'Syne', sans-serif;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 999px;
-  margin-bottom: 18px;
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--g3);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.5; transform:scale(1.4); }
 }
 
-.header-badge span { opacity: .7; }
-
-h1 {
+.hdr h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 5vw, 42px);
+  font-size: clamp(30px, 5.5vw, 46px);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.12;
   color: var(--ink);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  letter-spacing: -.02em;
 }
+.hdr h1 span { color: var(--g2); }
 
-h1 em {
-  font-style: normal;
-  color: var(--green);
-}
-
-.header-desc {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.65;
-  max-width: 540px;
-  border-left: 3px solid var(--green);
-  padding-left: 14px;
-}
-
-.header-desc strong { color: var(--ink); }
-
-.required-note {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 20px;
-  font-size: 13px; color: var(--muted);
+.hdr-desc {
+  font-size: 14.5px;
+  color: var(--ink2);
+  line-height: 1.7;
+  padding: 16px 20px;
   background: #fff;
   border: 1px solid var(--border);
-  padding: 6px 14px;
+  border-left: 4px solid var(--g2);
+  border-radius: 0 var(--r) var(--r) 0;
+  box-shadow: var(--sh);
+  max-width: 560px;
+}
+.hdr-desc em { font-style: italic; color: var(--muted); }
+
+.req-note {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 16px;
+  font-size: 12.5px; color: var(--muted);
+  padding: 5px 13px;
+  background: #fff;
+  border: 1px solid var(--border);
   border-radius: 999px;
+  box-shadow: var(--sh);
 }
+.dot-red { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink:0; }
 
-.req-dot {
-  width: 7px; height: 7px;
-  background: var(--required);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* ── PROGRESS ── */
-.progress-wrap {
-  margin-bottom: 32px;
-  animation: fadeUp .6s .1s ease both;
-}
-
-.progress-meta {
-  display: flex; justify-content: space-between;
-  font-size: 12px; color: var(--muted);
+/* PROGRESS */
+.prog-wrap { margin-bottom: 40px; animation: up .55s .08s ease both; }
+.prog-top {
+  display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 8px;
-  font-family: 'Syne', sans-serif;
 }
-
-.progress-bar {
-  height: 4px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--green-light));
-  border-radius: 999px;
-  width: 0%;
-  transition: width .4s cubic-bezier(.4,0,.2,1);
-}
-
-/* ── SECTIONS ── */
-.section-label {
+.prog-top span {
   font-family: 'Syne', sans-serif;
   font-size: 11px; font-weight: 700;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--green);
-  margin: 40px 0 14px;
-  display: flex; align-items: center; gap: 10px;
-  animation: fadeUp .5s ease both;
+  letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted);
+}
+.prog-top b { color: var(--g2); font-family: 'Syne', sans-serif; font-size: 12px; }
+.prog-track { height: 5px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.prog-bar {
+  height: 100%; width: 0%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--g1), var(--g2));
+  transition: width .45s cubic-bezier(.4,0,.2,1);
 }
 
-.section-label::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
+/* SECTION LABEL */
+.sec {
+  display: flex; align-items: center; gap: 12px;
+  margin: 44px 0 18px;
+  animation: up .45s ease both;
 }
+.sec-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--g2); white-space: nowrap;
+}
+.sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-/* ── CARD ── */
+/* CARD */
 .card {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  transition: border-color .2s, box-shadow .2s;
-  animation: fadeUp .5s ease both;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 26px;
+  margin-bottom: 14px;
+  box-shadow: var(--sh);
   position: relative;
+  transition: border-color .2s, box-shadow .2s, transform .15s;
+  animation: up .45s ease both;
   overflow: hidden;
 }
-
-.card::before {
+.card::after {
   content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--green);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform .25s ease;
-  border-radius: 0 0 0 0;
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+  background: var(--g2);
+  transition: width .2s ease;
 }
-
 .card:focus-within {
-  border-color: var(--green-light);
-  box-shadow: 0 0 0 3px rgba(26,122,74,0.10), var(--shadow);
+  border-color: var(--g2);
+  box-shadow: 0 0 0 4px rgba(22,163,74,.10), var(--sh-lg);
+  transform: translateY(-1px);
 }
+.card:focus-within::after { width: 3px; }
 
-.card:focus-within::before { transform: scaleY(1); }
-
-.card-label {
+.lbl {
   font-family: 'Syne', sans-serif;
-  font-size: 15px; font-weight: 700;
+  font-size: 14px; font-weight: 700;
   color: var(--ink);
-  margin-bottom: 4px;
-  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
 }
+.req { color: var(--red); font-size: 15px; line-height: 1; }
+.hint { font-size: 12.5px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
 
-.req { color: var(--required); font-weight: 800; }
-
-.card-hint {
-  font-size: 13px; color: var(--muted);
-  margin-bottom: 14px;
-  font-style: italic;
-}
-
-/* ── INPUTS ── */
+/* INPUTS */
 input[type="text"],
+input[type="email"],
 input[type="url"],
 input[type="date"],
 select {
   width: 100%;
-  border: 1.5px solid var(--border);
-  border-radius: 9px;
   padding: 11px 14px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14.5px;
   color: var(--ink);
-  background: var(--surface);
+  background: #fafcfa;
   outline: none;
-  transition: border-color .2s, box-shadow .2s;
+  transition: border-color .18s, box-shadow .18s, background .18s;
   -webkit-appearance: none;
+  appearance: none;
 }
-
-input[type="text"]::placeholder,
-input[type="url"]::placeholder { color: #b0bfb6; }
-
-input[type="text"]:focus,
-input[type="url"]:focus,
-input[type="date"]:focus,
-select:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(26,122,74,0.12);
+input::placeholder { color: #b8c5bc; }
+input:focus, select:focus {
+  border-color: var(--g2);
+  box-shadow: 0 0 0 3px rgba(22,163,74,.12);
   background: #fff;
 }
-
+input.err-field, select.err-field {
+  border-color: var(--red) !important;
+  box-shadow: 0 0 0 3px rgba(220,38,38,.08) !important;
+}
 input.uppercase { text-transform: uppercase; }
-input.uppercase::placeholder { text-transform: none; }
-
 select {
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a7a4a' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 40px;
+  background-position: right 13px center;
+  padding-right: 42px;
 }
 
-/* ── EMAIL CHECKBOX ── */
-.email-block {
-  background: linear-gradient(135deg, rgba(26,122,74,0.05), rgba(108,63,197,0.04));
-  border: 1.5px solid rgba(26,122,74,0.2);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  margin-bottom: 16px;
-  animation: fadeUp .5s ease both;
-}
-
-.email-row {
+/* RADIO OPTIONS */
+.opts { display: flex; flex-direction: column; gap: 9px; margin-top: 4px; }
+.opt {
   display: flex; align-items: center; gap: 12px;
-}
-
-.email-row input[type="checkbox"] {
-  width: 20px; height: 20px;
-  accent-color: var(--green);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.email-row label {
-  font-size: 14px; color: var(--ink);
-  cursor: pointer; line-height: 1.4;
-}
-
-.email-row label strong { color: var(--green); }
-
-/* ── RADIO ── */
-.radio-group, .check-group {
-  display: flex; flex-direction: column; gap: 10px;
-  margin-top: 6px;
-}
-
-.radio-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
-  border: 1.5px solid var(--border);
+  padding: 11px 16px;
+  border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   cursor: pointer;
-  transition: border-color .18s, background .18s;
+  transition: border-color .16s, background .16s;
   user-select: none;
 }
-
-.radio-item:hover { border-color: var(--green-light); background: rgba(26,122,74,0.04); }
-
-.radio-item input[type="radio"],
-.radio-item input[type="checkbox"] {
-  width: 18px; height: 18px;
-  accent-color: var(--green);
-  flex-shrink: 0;
+.opt:hover { border-color: var(--g2); background: rgba(22,163,74,.04); }
+.opt input[type="radio"] {
+  width: 17px; height: 17px;
+  accent-color: var(--g2);
+  flex-shrink: 0; cursor: pointer;
 }
+.opt span { font-size: 14px; color: var(--ink2); }
+.opt:has(input:checked) { border-color: var(--g2); background: rgba(22,163,74,.06); }
+.opt:has(input:checked) span { color: var(--ink); font-weight: 500; }
 
-.radio-item span { font-size: 14.5px; color: var(--ink); }
-
-.radio-item:has(input:checked) {
-  border-color: var(--green);
-  background: rgba(26,122,74,0.06);
+/* ERROR */
+.err-msg {
+  display: none; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--red); margin-top: 7px;
 }
+.err-msg.show { display: flex; }
 
-/* ── SUBMIT ── */
-.submit-wrap {
-  margin-top: 40px;
+/* SUBMIT */
+.actions {
   display: flex; flex-direction: column; align-items: center; gap: 14px;
-  animation: fadeUp .5s ease both;
+  margin-top: 44px; animation: up .45s ease both;
 }
-
-.btn-submit {
+.btn-sub {
   display: inline-flex; align-items: center; gap: 10px;
-  background: var(--green);
+  padding: 15px 50px;
+  border: none; border-radius: 999px;
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
   color: #fff;
   font-family: 'Syne', sans-serif;
-  font-size: 16px; font-weight: 700;
-  padding: 16px 48px;
-  border: none; border-radius: 999px;
+  font-size: 15.5px; font-weight: 700;
+  letter-spacing: .025em;
   cursor: pointer;
-  transition: background .2s, transform .15s, box-shadow .2s;
-  box-shadow: 0 6px 24px rgba(26,122,74,0.28);
-  letter-spacing: .02em;
+  box-shadow: 0 6px 24px rgba(20,83,45,.28);
+  transition: transform .15s, box-shadow .15s, opacity .15s;
 }
-
-.btn-submit:hover {
-  background: var(--green-dim);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(26,122,74,0.34);
-}
-
-.btn-submit:active { transform: scale(.97); }
-
-.btn-clear {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 14px;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.btn-sub:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(20,83,45,.35); }
+.btn-sub:active:not(:disabled) { transform: scale(.97); }
+.btn-sub:disabled { opacity: .65; cursor: not-allowed; }
+.btn-clr {
+  background: none; border: none;
+  font-size: 13px; color: var(--muted);
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
   transition: color .15s;
 }
+.btn-clr:hover { color: var(--red); }
 
-.btn-clear:hover { color: var(--required); }
-
-/* ── SUCCESS ── */
-#success-msg {
-  display: none;
-  background: var(--card);
-  border: 2px solid var(--green);
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  text-align: center;
-  margin-top: 32px;
-  box-shadow: var(--shadow);
-  animation: fadeUp .5s ease;
+/* SUCCESS */
+#ok {
+  display: none; flex-direction: column; align-items: center;
+  text-align: center; padding: 56px 32px;
+  background: var(--card); border: 2px solid var(--g2);
+  border-radius: var(--r); box-shadow: var(--sh-lg);
+  margin-top: 32px; animation: up .5s ease;
 }
-
-#success-msg .check-icon {
-  width: 56px; height: 56px;
-  background: var(--green);
-  border-radius: 50%;
+.ok-ring {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--g1), var(--g2));
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
+  margin-bottom: 22px; box-shadow: 0 8px 24px rgba(22,163,74,.3);
 }
-
-#success-msg .check-icon svg { width: 28px; color: #fff; }
-
-#success-msg h2 {
-  font-family: 'Syne', sans-serif;
-  font-size: 22px; font-weight: 800;
+.ok-ring svg { width: 32px; color: #fff; }
+#ok h2 {
+  font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800;
   color: var(--ink); margin-bottom: 10px;
 }
+#ok p { font-size: 14.5px; color: var(--muted); line-height: 1.65; }
 
-#success-msg p { font-size: 15px; color: var(--muted); }
-
-/* ── ERROR ── */
-.field-error {
-  font-size: 12px;
-  color: var(--required);
-  margin-top: 6px;
-  display: none;
-  align-items: center; gap: 5px;
+/* FOOTER */
+footer {
+  text-align: center; font-size: 12px; color: var(--muted);
+  margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border);
 }
+footer strong { color: var(--g1); font-weight: 600; }
 
-.field-error.show { display: flex; }
-
-input.invalid, select.invalid { border-color: var(--required) !important; }
-
-/* ── FOOTER ── */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 48px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+/* KEYFRAMES */
+@keyframes up {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.footer strong {
-  font-family: 'Syne', sans-serif;
-  color: var(--green);
-}
+.card:nth-child(1)  { animation-delay:.04s }
+.card:nth-child(2)  { animation-delay:.08s }
+.card:nth-child(3)  { animation-delay:.12s }
+.card:nth-child(4)  { animation-delay:.16s }
+.card:nth-child(5)  { animation-delay:.20s }
+.card:nth-child(6)  { animation-delay:.24s }
+.card:nth-child(7)  { animation-delay:.28s }
+.card:nth-child(8)  { animation-delay:.32s }
+.card:nth-child(9)  { animation-delay:.36s }
+.card:nth-child(10) { animation-delay:.40s }
+.card:nth-child(11) { animation-delay:.44s }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Stagger cards */
-.card:nth-child(1)  { animation-delay: .05s }
-.card:nth-child(2)  { animation-delay: .10s }
-.card:nth-child(3)  { animation-delay: .15s }
-.card:nth-child(4)  { animation-delay: .20s }
-.card:nth-child(5)  { animation-delay: .25s }
-.card:nth-child(6)  { animation-delay: .30s }
-.card:nth-child(7)  { animation-delay: .35s }
-
-@media (max-width: 500px) {
-  .page-wrap { padding: 0 14px 60px; }
+@media (max-width: 520px) {
+  .wrap { padding: 64px 14px 80px; }
   .card { padding: 18px 18px; }
-  h1 { font-size: 26px; }
-  .btn-submit { width: 100%; justify-content: center; }
+  .btn-sub { width: 100%; justify-content: center; padding: 15px 24px; }
 }
 ```
 
@@ -449,224 +347,185 @@ input.invalid, select.invalid { border-color: var(--required) !important; }
 </head>
 <body>
 
-<div class="top-bar"></div>
+<div class="stripe"></div>
 
-<div class="page-wrap">
+<div class="wrap">
 
-  <!-- HEADER -->
-
-  <header class="header">
-    <div class="header-badge">
-      Université des Sciences de la Santé
-      <span>•</span>
-      L3 AUX·P
-    </div>
-    <h1>Envoi Rapport<br/>de Stage <em>AUX L3</em></h1>
-    <p class="header-desc">
+  <header class="hdr">
+    <div class="badge">Université des Sciences de la Santé · L3 AUX·P</div>
+    <h1>Envoi Rapport<br/>de Stage <span>AUX L3</span></h1>
+    <div class="hdr-desc">
       Rapport de stage L3 AUXP.<br/>
-      <strong>Laboratoire de biologie médicale &amp; Pharmacie officinale/hospitalière.</strong><br/>
+      <em>Laboratoire de biologie médicale &amp; Pharmacie officinale/hospitalière.</em><br/>
       Chaque étudiant est tenu de remplir ce formulaire à titre personnel, avec toutes les informations exactes ainsi que le lien drive du PDF.
-    </p>
-    <div class="required-note">
-      <span class="req-dot"></span>
-      Les champs marqués d'un <strong style="color:var(--required);margin:0 3px">*</strong> sont obligatoires
+    </div>
+    <div class="req-note">
+      <span class="dot-red"></span>
+      Les champs marqués d'un <strong style="color:var(--red);margin:0 2px">*</strong> sont obligatoires
     </div>
   </header>
 
-  <!-- PROGRESS -->
-
-  <div class="progress-wrap">
-    <div class="progress-meta">
+  <div class="prog-wrap">
+    <div class="prog-top">
       <span>Progression</span>
-      <span id="progress-pct">0 / 12 champs</span>
+      <b id="prog-txt">0 / 13 champs</b>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="prog-track"><div class="prog-bar" id="prog-bar"></div></div>
   </div>
 
-  <form id="rapport-form" novalidate>
+  <form id="form" novalidate>
 
 ```
-<!-- ── EMAIL ── -->
-<div class="section-label">Identification</div>
+<div class="sec"><span class="sec-text">Identification</span><span class="sec-line"></span></div>
 
-<div class="email-block">
-  <div class="card-label" style="margin-bottom:12px">Email <span class="req">*</span></div>
-  <div class="email-row">
-    <input type="checkbox" id="email-check" name="email_consent" />
-    <label for="email-check">
-      Enregistrer mon email <strong id="email-display">—</strong> dans ma réponse
-    </label>
-  </div>
-  <div class="field-error" id="err-email">⚠ Veuillez cocher pour enregistrer votre email.</div>
+<!-- Email -->
+<div class="card">
+  <div class="lbl">Email <span class="req">*</span></div>
+  <div class="hint">Entrez votre adresse email universitaire ou personnelle.</div>
+  <input type="email" id="email" name="email" placeholder="ex: prenom.nom@uss.dz" autocomplete="email" />
+  <div class="err-msg" id="err-email">⚠ Veuillez entrer une adresse email valide.</div>
 </div>
 
 <!-- Numéro liste -->
 <div class="card">
-  <div class="card-label">Numéro sur la liste <span class="req">*</span></div>
+  <div class="lbl">Numéro sur la liste <span class="req">*</span></div>
   <input type="text" id="num-liste" name="numero_liste" placeholder="ex: 14" />
-  <div class="field-error" id="err-num">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-num">⚠ Ce champ est obligatoire.</div>
 </div>
 
 <!-- Année bac -->
 <div class="card">
-  <div class="card-label">Année bac <span class="req">*</span></div>
-  <input type="text" id="annee-bac" name="annee_bac" placeholder="ex: 2022" />
-  <div class="field-error" id="err-bac">⚠ Ce champ est obligatoire.</div>
+  <div class="lbl">Année bac <span class="req">*</span></div>
+  <input type="text" id="annee-bac" name="annee_bac" placeholder="ex: 2022" maxlength="4" />
+  <div class="err-msg" id="err-bac">⚠ Ce champ est obligatoire.</div>
 </div>
 
 <!-- Matricule -->
 <div class="card">
-  <div class="card-label">Matricule Progres <span class="req">*</span></div>
+  <div class="lbl">Matricule Progres <span class="req">*</span></div>
   <input type="text" id="matricule" name="matricule" placeholder="ex: 202300XXXX" />
-  <div class="field-error" id="err-mat">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-mat">⚠ Ce champ est obligatoire.</div>
 </div>
 
 <!-- NOM -->
 <div class="card">
-  <div class="card-label">NOM <span class="req">*</span></div>
-  <div class="card-hint">TOUT EN MAJUSCULE.</div>
+  <div class="lbl">NOM <span class="req">*</span></div>
+  <div class="hint">TOUT EN MAJUSCULE.</div>
   <input type="text" id="nom" name="nom" class="uppercase" placeholder="Votre nom de famille" />
-  <div class="field-error" id="err-nom">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-nom">⚠ Ce champ est obligatoire.</div>
 </div>
 
 <!-- PRÉNOM -->
 <div class="card">
-  <div class="card-label">PRÉNOM <span class="req">*</span></div>
-  <div class="card-hint">TOUT EN MAJUSCULE.</div>
+  <div class="lbl">PRÉNOM <span class="req">*</span></div>
+  <div class="hint">TOUT EN MAJUSCULE.</div>
   <input type="text" id="prenom" name="prenom" class="uppercase" placeholder="Votre prénom" />
-  <div class="field-error" id="err-prenom">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-prenom">⚠ Ce champ est obligatoire.</div>
 </div>
 
-<!-- ── STAGE INFO ── -->
-<div class="section-label">Informations du stage</div>
+<div class="sec"><span class="sec-text">Informations du stage</span><span class="sec-line"></span></div>
 
 <!-- Période -->
 <div class="card">
-  <div class="card-label">Période <span class="req">*</span></div>
+  <div class="lbl">Période <span class="req">*</span></div>
   <select id="periode" name="periode">
     <option value="">-- Choisir une période --</option>
     <option value="Période 1 (11-2025 / 02-2026)">Période 1 — Nov 2025 · Fév 2026</option>
     <option value="Période 2 (03-2026 / 05-2026)">Période 2 — Mar 2026 · Mai 2026</option>
   </select>
-  <div class="field-error" id="err-periode">⚠ Veuillez sélectionner une période.</div>
+  <div class="err-msg" id="err-periode">⚠ Veuillez sélectionner une période.</div>
 </div>
 
 <!-- Type de stage -->
 <div class="card">
-  <div class="card-label">Type de stage <span class="req">*</span></div>
-  <div class="radio-group" id="type-stage-group">
-    <label class="radio-item">
-      <input type="radio" name="type_stage" value="Laboratoire d'analyses Hôpital" />
-      <span>Laboratoire d'analyses Hôpital</span>
-    </label>
-    <label class="radio-item">
-      <input type="radio" name="type_stage" value="Laboratoire d'analyses Privé" />
-      <span>Laboratoire d'analyses Privé</span>
-    </label>
-    <label class="radio-item">
-      <input type="radio" name="type_stage" value="Pharmacie d'officine" />
-      <span>Pharmacie d'officine</span>
-    </label>
-    <label class="radio-item">
-      <input type="radio" name="type_stage" value="Pharmacie hospitalière" />
-      <span>Pharmacie hospitalière</span>
-    </label>
+  <div class="lbl">Type de stage <span class="req">*</span></div>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="type_stage" value="Laboratoire d'analyses Hôpital"/><span>Laboratoire d'analyses Hôpital</span></label>
+    <label class="opt"><input type="radio" name="type_stage" value="Laboratoire d'analyses Privé"/><span>Laboratoire d'analyses Privé</span></label>
+    <label class="opt"><input type="radio" name="type_stage" value="Pharmacie d'officine"/><span>Pharmacie d'officine</span></label>
+    <label class="opt"><input type="radio" name="type_stage" value="Pharmacie hospitalière"/><span>Pharmacie hospitalière</span></label>
   </div>
-  <div class="field-error" id="err-type">⚠ Veuillez sélectionner un type de stage.</div>
+  <div class="err-msg" id="err-type">⚠ Veuillez sélectionner un type de stage.</div>
 </div>
 
 <!-- Attribution terrain -->
 <div class="card">
-  <div class="card-label">Attribution terrain <span class="req">*</span></div>
-  <div class="radio-group" id="attribution-group">
-    <label class="radio-item">
-      <input type="radio" name="attribution" value="Attribution par répartition" />
-      <span>Attribution par répartition</span>
-    </label>
-    <label class="radio-item">
-      <input type="radio" name="attribution" value="Initiative personnelle" />
-      <span>Initiative personnelle</span>
-    </label>
+  <div class="lbl">Attribution terrain <span class="req">*</span></div>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="attribution" value="Attribution par répartition"/><span>Attribution par répartition</span></label>
+    <label class="opt"><input type="radio" name="attribution" value="Initiative personnelle"/><span>Initiative personnelle</span></label>
   </div>
-  <div class="field-error" id="err-attrib">⚠ Veuillez sélectionner une attribution.</div>
+  <div class="err-msg" id="err-attrib">⚠ Veuillez sélectionner une attribution.</div>
 </div>
 
-<!-- Début du stage -->
+<!-- Début -->
 <div class="card">
-  <div class="card-label">Début du stage <span class="req">*</span></div>
-  <div class="card-hint">Écrivez la date mentionnée sur la convention de stage.</div>
+  <div class="lbl">Début du stage <span class="req">*</span></div>
+  <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
   <input type="date" id="debut" name="debut_stage" />
-  <div class="field-error" id="err-debut">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-debut">⚠ Ce champ est obligatoire.</div>
 </div>
 
-<!-- Fin du stage -->
+<!-- Fin -->
 <div class="card">
-  <div class="card-label">Fin du stage <span class="req">*</span></div>
-  <div class="card-hint">Écrivez la date mentionnée sur la convention de stage.</div>
+  <div class="lbl">Fin du stage <span class="req">*</span></div>
+  <div class="hint">Écrivez la date mentionnée sur la convention de stage.</div>
   <input type="date" id="fin" name="fin_stage" />
-  <div class="field-error" id="err-fin">⚠ Ce champ est obligatoire.</div>
+  <div class="err-msg" id="err-fin">⚠ Ce champ est obligatoire.</div>
 </div>
 
-<!-- ── RAPPORT ── -->
-<div class="section-label">Rapport & Établissement</div>
+<div class="sec"><span class="sec-text">Rapport &amp; Établissement</span><span class="sec-line"></span></div>
 
-<!-- Nom établissement -->
+<!-- Établissement -->
 <div class="card">
-  <div class="card-label">Nom de l'établissement <span class="req">*</span></div>
-  <input type="text" id="etablissement" name="etablissement" placeholder="ex: CHU Beni Messous" />
-  <div class="field-error" id="err-etab">⚠ Ce champ est obligatoire.</div>
+  <div class="lbl">Nom de l'établissement <span class="req">*</span></div>
+  <input type="text" id="etab" name="etablissement" placeholder="ex: CHU Beni Messous" />
+  <div class="err-msg" id="err-etab">⚠ Ce champ est obligatoire.</div>
 </div>
 
 <!-- Lien Drive -->
 <div class="card">
-  <div class="card-label">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
-  <input type="url" id="lien-drive" name="lien_drive" placeholder="https://drive.google.com/..." />
-  <div class="field-error" id="err-lien">⚠ Veuillez entrer un lien Google Drive valide.</div>
+  <div class="lbl">Lien drive du PDF du RAPPORT <span class="req">*</span></div>
+  <div class="hint">Assurez-vous que le fichier est partagé en accès public (mode "Lien").</div>
+  <input type="url" id="lien" name="lien_drive" placeholder="https://drive.google.com/file/d/..." />
+  <div class="err-msg" id="err-lien">⚠ Veuillez entrer un lien valide (commençant par https://).</div>
 </div>
 
-<!-- SUBMIT -->
-<div class="submit-wrap">
-  <button type="submit" class="btn-submit">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+<div class="actions">
+  <button type="submit" class="btn-sub" id="btn-sub">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     Soumettre le rapport
   </button>
-  <button type="button" class="btn-clear" onclick="clearForm()">Effacer le formulaire</button>
+  <button type="button" class="btn-clr" onclick="clearForm()">Effacer le formulaire</button>
 </div>
 ```
 
   </form>
 
-  <!-- SUCCESS -->
-
-  <div id="success-msg">
-    <div class="check-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+  <div id="ok">
+    <div class="ok-ring">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
-    <h2>Rapport soumis avec succès !</h2>
-    <p>Merci, votre rapport de stage a bien été enregistré.<br/>Vous recevrez une confirmation par email si applicable.</p>
+    <h2>Rapport soumis !</h2>
+    <p>Votre rapport de stage a bien été enregistré.<br/>Merci pour votre soumission.</p>
   </div>
 
-  <footer class="footer">
+  <footer>
     <strong>Faculté de Pharmacie</strong> · Université des Sciences de la Santé<br/>
     Rapport de stage L3 AUX·P — Formulaire officiel
   </footer>
-
 </div>
 
 <script>
-  // ── 🔧 PASTE YOUR APPS SCRIPT URL HERE ──
-  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+  // ── COLLE TON URL APPS SCRIPT ICI ──────────────────────────
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxR0EdJMwrKOgb5PonVVqaWs-X9HGGTk0SKh_DhTzWApj28CDFaS1bnzj-E9Ad2OdigmA/exec";
+  // ────────────────────────────────────────────────────────────
 
-  // ── Fake email (in production link to real auth) ──
-  const mockEmail = "etudiant@uss.dz";
-  document.getElementById('email-display').textContent = mockEmail;
+  const TOTAL = 13;
 
-  // ── Progress tracker ──
-  const TOTAL_FIELDS = 12;
   function updateProgress() {
-    let filled = 0;
-    const email  = document.getElementById('email-check').checked;
-    const fields = [
+    const vals = [
+      document.getElementById('email').value.trim(),
       document.getElementById('num-liste').value.trim(),
       document.getElementById('annee-bac').value.trim(),
       document.getElementById('matricule').value.trim(),
@@ -677,75 +536,53 @@ input.invalid, select.invalid { border-color: var(--required) !important; }
       document.querySelector('input[name="attribution"]:checked') ? '1' : '',
       document.getElementById('debut').value,
       document.getElementById('fin').value,
-      document.getElementById('etablissement').value.trim(),
-      document.getElementById('lien-drive').value.trim(),
+      document.getElementById('etab').value.trim(),
+      document.getElementById('lien').value.trim(),
     ];
-    if (email) filled++;
-    fields.forEach(v => { if (v) filled++; });
-    const pct = Math.round((filled / TOTAL_FIELDS) * 100);
-    document.getElementById('progress-fill').style.width = pct + '%';
-    document.getElementById('progress-pct').textContent = filled + ' / ' + TOTAL_FIELDS + ' champs';
+    const filled = vals.filter(Boolean).length;
+    document.getElementById('prog-bar').style.width = Math.round(filled / TOTAL * 100) + '%';
+    document.getElementById('prog-txt').textContent = filled + ' / ' + TOTAL + ' champs';
   }
 
-  // attach listeners
   document.querySelectorAll('input, select').forEach(el => {
     el.addEventListener('input', updateProgress);
     el.addEventListener('change', updateProgress);
   });
 
-  // ── Uppercase transform ──
   document.querySelectorAll('.uppercase').forEach(el => {
     el.addEventListener('input', function() {
-      const pos = this.selectionStart;
+      const p = this.selectionStart;
       this.value = this.value.toUpperCase();
-      this.setSelectionRange(pos, pos);
+      this.setSelectionRange(p, p);
     });
   });
 
-  // ── Validation ──
-  function showErr(id, show) {
-    const el = document.getElementById(id);
-    if (el) el.classList.toggle('show', show);
-  }
-
-  function markInvalid(id, invalid) {
-    const el = document.getElementById(id);
-    if (el) el.classList.toggle('invalid', invalid);
-  }
+  function showErr(id, on) { document.getElementById(id)?.classList.toggle('show', on); }
+  function markErr(el, on) { el?.classList.toggle('err-field', on); }
 
   function validate() {
     let ok = true;
 
-    const emailOk = document.getElementById('email-check').checked;
-    showErr('err-email', !emailOk);
+    const emailEl = document.getElementById('email');
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+    showErr('err-email', !emailOk); markErr(emailEl, !emailOk);
     if (!emailOk) ok = false;
 
-    const fields = [
-      { id: 'num-liste',    err: 'err-num' },
-      { id: 'annee-bac',   err: 'err-bac' },
-      { id: 'matricule',   err: 'err-mat' },
-      { id: 'nom',         err: 'err-nom' },
-      { id: 'prenom',      err: 'err-prenom' },
-      { id: 'etablissement', err: 'err-etab' },
-      { id: 'debut',       err: 'err-debut' },
-      { id: 'fin',         err: 'err-fin' },
-    ];
-
-    fields.forEach(({ id, err }) => {
-      const v = document.getElementById(id).value.trim();
-      const bad = !v;
-      showErr(err, bad);
-      markInvalid(id, bad);
+    [
+      ['num-liste','err-num'],['annee-bac','err-bac'],['matricule','err-mat'],
+      ['nom','err-nom'],['prenom','err-prenom'],
+      ['debut','err-debut'],['fin','err-fin'],['etab','err-etab']
+    ].forEach(([id, err]) => {
+      const el = document.getElementById(id);
+      const bad = !el.value.trim();
+      showErr(err, bad); markErr(el, bad);
       if (bad) ok = false;
     });
 
-    // Select
-    const per = document.getElementById('periode').value;
-    showErr('err-periode', !per);
-    markInvalid('periode', !per);
-    if (!per) ok = false;
+    const per = document.getElementById('periode');
+    showErr('err-periode', !per.value); markErr(per, !per.value);
+    if (!per.value) ok = false;
 
-    // Radios
     const typeOk = !!document.querySelector('input[name="type_stage"]:checked');
     showErr('err-type', !typeOk);
     if (!typeOk) ok = false;
@@ -754,29 +591,27 @@ input.invalid, select.invalid { border-color: var(--required) !important; }
     showErr('err-attrib', !attOk);
     if (!attOk) ok = false;
 
-    // URL
-    const lien = document.getElementById('lien-drive').value.trim();
-    const lienOk = lien && (lien.startsWith('https://') || lien.startsWith('http://'));
-    showErr('err-lien', !lienOk);
-    markInvalid('lien-drive', !lienOk);
+    const lienEl = document.getElementById('lien');
+    const lienOk = /^https?:\/\/.+/.test(lienEl.value.trim());
+    showErr('err-lien', !lienOk); markErr(lienEl, !lienOk);
     if (!lienOk) ok = false;
 
     return ok;
   }
 
-  // ── Submit ──
-  document.getElementById('rapport-form').addEventListener('submit', function(e) {
+  document.getElementById('form').addEventListener('submit', function(e) {
     e.preventDefault();
     if (!validate()) {
-      // scroll to first error
-      const firstErr = document.querySelector('.field-error.show');
-      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.querySelector('.err-msg.show')?.scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
 
-    // Collect data
-    const data = {
-      email_consent: document.getElementById('email-check').checked,
+    const btn = document.getElementById('btn-sub');
+    btn.disabled = true;
+    btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="animation:spin .9s linear infinite"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 1-10-10"/></svg> Envoi en cours…`;
+
+    const payload = {
+      email:         document.getElementById('email').value.trim(),
       numero_liste:  document.getElementById('num-liste').value.trim(),
       annee_bac:     document.getElementById('annee-bac').value.trim(),
       matricule:     document.getElementById('matricule').value.trim(),
@@ -787,41 +622,36 @@ input.invalid, select.invalid { border-color: var(--required) !important; }
       attribution:   document.querySelector('input[name="attribution"]:checked').value,
       debut_stage:   document.getElementById('debut').value,
       fin_stage:     document.getElementById('fin').value,
-      etablissement: document.getElementById('etablissement').value.trim(),
-      lien_drive:    document.getElementById('lien-drive').value.trim(),
+      etablissement: document.getElementById('etab').value.trim(),
+      lien_drive:    document.getElementById('lien').value.trim(),
     };
 
-    // Disable button and show loading state
-    const btn = document.querySelector('.btn-submit');
-    btn.disabled = true;
-    btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Envoi en cours…`;
-
-    fetch(APPS_SCRIPT_URL, {
+    fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     })
     .then(() => {
-      document.getElementById('rapport-form').style.display = 'none';
-      const msg = document.getElementById('success-msg');
-      msg.style.display = 'block';
-      msg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('form').style.display = 'none';
+      const ok = document.getElementById('ok');
+      ok.style.display = 'flex';
+      ok.scrollIntoView({ behavior: 'smooth', block: 'start' });
     })
     .catch(() => {
       btn.disabled = false;
-      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg> Soumettre le rapport`;
-      alert("Erreur de connexion. Vérifiez votre connexion et réessayez.");
+      btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Soumettre le rapport`;
+      alert("❌ Erreur réseau. Vérifiez votre connexion et réessayez.");
     });
   });
 
-  // ── Clear ──
   function clearForm() {
     if (!confirm('Effacer tous les champs ?')) return;
-    document.getElementById('rapport-form').reset();
-    document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
-    document.querySelectorAll('.invalid').forEach(e => e.classList.remove('invalid'));
+    document.getElementById('form').reset();
+    document.querySelectorAll('.err-msg').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('.err-field').forEach(e => e.classList.remove('err-field'));
     updateProgress();
+    window.scrollTo({ top:0, behavior:'smooth' });
   }
 </script>
 
